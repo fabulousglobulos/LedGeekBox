@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Test_Layout_wpf_led
+namespace LedGeekBox
 {
     /// <summary>
     /// Logique d'interaction pour App.xaml

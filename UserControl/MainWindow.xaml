@@ -1,0 +1,49 @@
+﻿<Window x:Class="LedGeekBox.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LedGeekBox"
+        xmlns:z="http://schemas.microsoft.com/expression/blend/2008" 
+        mc:Ignorable="d"
+        Title="MainWindow"   z:DesignHeight="500"   z:DesignWidth="900"  SizeToContent="WidthAndHeight">
+    <!-- Height="500"  Width="900"-->
+    <Grid  >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition  Height="Auto" />
+            <!--<RowDefinition  Height="Auto" />-->
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <!--<ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />-->
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <local:MaxLayout Grid.ColumnSpan="4" x:Name="maxlayout"></local:MaxLayout>
+        <!--<Border BorderBrush="#FFFF0000" BorderThickness="1" />
+       <local:max7219 x:Name="max1" Grid.Row="0" Grid.Column="0" Height="Auto"></local:max7219>
+        <local:max7219 x:Name="max2" Grid.Row="0" Grid.Column="1" Height="Auto"></local:max7219>
+        <local:max7219 x:Name="max3" Grid.Row="0" Grid.Column="2" Height="Auto"></local:max7219>
+        <local:max7219 x:Name="max4" Grid.Row="0" Grid.Column="3" Height="Auto"></local:max7219>
+        <local:max7219 x:Name="max5" Grid.Row="0" Grid.Column="4" Height="Auto"></local:max7219>
+        
+        
+        <local:max7219 x:Name="max6" Grid.Row="1" Grid.Column="0" Height="Auto"></local:max7219>
+        <local:max7219 x:Name="max7" Grid.Row="1" Grid.Column="1" Height="Auto"></local:max7219>
+        <local:max7219 x:Name="max8" Grid.Row="1" Grid.Column="2" Height="Auto"></local:max7219>
+        <local:max7219 x:Name="max9" Grid.Row="1" Grid.Column="3" Height="Auto"></local:max7219>
+        <local:max7219 x:Name="max10" Grid.Row="1" Grid.Column="4" Height="Auto"></local:max7219>-->
+
+        <Button Command="{Binding Path=XDisplayCommand}" Grid.Row="1" Grid.Column="0" Height="20" Width="40" Content="Click"></Button>
+        <Button Command="{Binding Path=DisplayCustomTextCommand}" Grid.Row="1" Grid.Column="1" Height="20" Width="40" Content="Click" />
+        <TextBox  Grid.Row="1" Grid.Column="2" x:Name="message"   Text="{Binding Path=Line1}"/> <!-- Text="Hello World! 123456" />-->
+        <TextBox  Grid.Row="1" Grid.Column="3" x:Name="message2"   Text="{Binding Path=Line2}"/>
+        <!-- Text="Hello World! 123456" />-->
+    </Grid>
+</Window>
