@@ -67,6 +67,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Definition.cs" />
+    <Compile Include="Model.cs" />
+    <Compile Include="ThreadObject.cs" />
     <Compile Include="UserControl\ColorToBrushConverter.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="UserControl\MaxLayout.xaml.cs">

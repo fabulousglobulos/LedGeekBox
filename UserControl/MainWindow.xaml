@@ -12,13 +12,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition  Height="Auto" />
-            <!--<RowDefinition  Height="Auto" />-->
+            <RowDefinition  Height="Auto" />
+
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <!--<ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />-->
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
@@ -26,24 +24,27 @@
         </Grid.ColumnDefinitions>
 
         <local:MaxLayout Grid.ColumnSpan="4" x:Name="maxlayout"></local:MaxLayout>
-        <!--<Border BorderBrush="#FFFF0000" BorderThickness="1" />
-       <local:max7219 x:Name="max1" Grid.Row="0" Grid.Column="0" Height="Auto"></local:max7219>
-        <local:max7219 x:Name="max2" Grid.Row="0" Grid.Column="1" Height="Auto"></local:max7219>
-        <local:max7219 x:Name="max3" Grid.Row="0" Grid.Column="2" Height="Auto"></local:max7219>
-        <local:max7219 x:Name="max4" Grid.Row="0" Grid.Column="3" Height="Auto"></local:max7219>
-        <local:max7219 x:Name="max5" Grid.Row="0" Grid.Column="4" Height="Auto"></local:max7219>
-        
-        
-        <local:max7219 x:Name="max6" Grid.Row="1" Grid.Column="0" Height="Auto"></local:max7219>
-        <local:max7219 x:Name="max7" Grid.Row="1" Grid.Column="1" Height="Auto"></local:max7219>
-        <local:max7219 x:Name="max8" Grid.Row="1" Grid.Column="2" Height="Auto"></local:max7219>
-        <local:max7219 x:Name="max9" Grid.Row="1" Grid.Column="3" Height="Auto"></local:max7219>
-        <local:max7219 x:Name="max10" Grid.Row="1" Grid.Column="4" Height="Auto"></local:max7219>-->
 
-        <Button Command="{Binding Path=XDisplayCommand}" Grid.Row="1" Grid.Column="0" Height="20" Width="40" Content="Click"></Button>
-        <Button Command="{Binding Path=DisplayCustomTextCommand}" Grid.Row="1" Grid.Column="1" Height="20" Width="40" Content="Click" />
-        <TextBox  Grid.Row="1" Grid.Column="2" x:Name="message"   Text="{Binding Path=Line1}"/> <!-- Text="Hello World! 123456" />-->
-        <TextBox  Grid.Row="1" Grid.Column="3" x:Name="message2"   Text="{Binding Path=Line2}"/>
-        <!-- Text="Hello World! 123456" />-->
+        <!--  XXXX ou number -->
+        <Button Command="{Binding Path=XDisplayCommand}" Grid.Row="1" Grid.Column="0" Height="20"  Content="XXXXX  or number" HorizontalAlignment="Center"></Button>
+
+        <Button Command="{Binding Path=DisplayHourCommand}" Grid.Row="1" Grid.Column="1" Height="20"  Content="Hour" HorizontalAlignment="Center"></Button>
+
+
+        <!--  marquee message -->
+        <Button Command="{Binding Path=DisplayCustomTextCommand}" Grid.Row="2" Grid.Column="0" Height="20" Content="Custom" HorizontalAlignment="Center" />
+      
+        <WrapPanel Grid.Row="2" Grid.Column="1"  Orientation="Vertical" HorizontalAlignment="Center">
+            <Label  Content="1st row"/>
+            <TextBox  x:Name="message"   Text="{Binding Path=Line1}"/>
+            <CheckBox Content="Reverse" IsChecked="{Binding Path=Reverse1}"  />
+        </WrapPanel>
+
+        <WrapPanel Grid.Row="2" Grid.Column="2"  Orientation="Vertical" HorizontalAlignment="Center">
+            <Label  Content="2nd row"/>
+            <TextBox   x:Name="message2"   Text="{Binding Path=Line2}"/>
+            <CheckBox  Content="Reverse" IsChecked="{Binding Path=Reverse2}"  />
+        </WrapPanel>
+
     </Grid>
 </Window>
