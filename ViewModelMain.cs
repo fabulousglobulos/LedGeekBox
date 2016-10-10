@@ -76,173 +76,22 @@ namespace LedGeekBox
 
         private void XDisplayClick()
         {
-            #region mapping
-            bool[,] zero = new bool[8, 8]
-          {
-                  {false, false, false, false, false, false, false, false},
-                  {false, false, false, true, true, false, false, false},
-                  {false, false, true, false, false, true, false, false},
-                  {false, false, true, false, false, true, false, false},
-                  {false, false, true, false, false, true, false, false},
-                  {false, false, true, false, false, true, false, false},
-                  {false, false, false, true, true, false, false, false},
-                  {false, false, false, false, false, false, false, false},
-          };
-
-            bool[,] un = new bool[8, 8]
-            {
-                  {false, false, false, false, false, false, false, false},
-                  {false, false, false, false, true, false, false, false},
-                  {false, false, false, true, true, false, false, false},
-                  {false, false, true, false, true, false, false, false},
-                  {false, false, false, false, true, false, false, false},
-                  {false, false, false, false, true, false, false, false},
-                  {false, false, false, false, true, false, false, false},
-                  {false, false, false, false, false, false, false, false}
-            };
-
-
-            bool[,] deux = new bool[8, 8]
-             {
-                  { false, false, false, false, false, false, false, false },
-                  { false, false, true, true, true, false, false, false},
-                  { false, false, false, false, false, true, false, false},
-                  { false, false, false, true, true, true, false, false},
-                  { false, false, true, false, false, false, false, false},
-                  { false, false, true, false, false, false, false, false},
-                  { false, false, true, true, true, true, false, false},
-                  { false, false, false, false, false, false, false, false}
-             };
-
-
-            bool[,] trois = new bool[8, 8]
-             {
-                  { false, false, false, false, false, false, false, false },
-                  { false, false, true, true, true, false, false, false },
-                  { false, false, false, false, false, true, false, false },
-                  { false, false, false, true, true, true, false, false },
-                  { false, false, false, false, false, true, false, false },
-                  { false, false, false, false, false, true, false, false },
-                  { false, false, true, true, true, false, false, false },
-                  { false, false, false, false, false, false, false, false },
-             };
-
-
-
-            bool[,] quatre = new bool[8, 8]
-             {
-                  { false, false, false, false, false, false, false, false },
-                  { false, false, false, false, true, true, false, false },
-                  { false, false, false, true, false, true, false, false },
-                  { false, false, true, false, false, true, false, false },
-                  { false, false, true, true, true, true, false, false },
-                  { false, false, false, false, false, true, false, false },
-                  { false, false, false, false, false, true, false, false},
-                  { false, false, false, false, false, false, false, false },
-             };
-
-
-
-
-            bool[,] cinq = new bool[8, 8]
-             {
-                  { false, false, false, false, false, false, false, false },
-                  { false, false, true, true, true, true, false, false },
-                  { false, false, true, false, false, false, false, false },
-                  { false, false, true, true, true, false, false, false },
-                  { false, false, false, false, false, true, false, false },
-                  { false, false, false, false, false, true, false, false },
-                  { false, false, true, true, true, false, false, false},
-                  { false, false, false, false, false, false, false, false },
-             };
-
-
-
-            bool[,] six = new bool[8, 8]
-             {
-                  { false, false, false, false, false, false, false, false },
-                  { false, false, false, true, true, true, false, false },
-                  { false, false, true, false, false, false, false, false },
-                  { false, false, true, false, false, false, false, false },
-                  { false, false, true, true, true, false, false, false },
-                  { false, false, true, false, false, true, false, false },
-                  { false, false, false, true, true, true, false, false},
-                  { false, false, false, false, false, false, false, false },
-             };
-
-
-            bool[,] sept = new bool[8, 8]
-             {
-                  { false, false, false, false, false, false, false, false },
-                  { false, false, true, true, true, false, false, false },
-                  { false, false, false, false, true, false, false, false },
-                  { false, false, false, false, true, false, false, false },
-                  { false, false, false, true, true, false, false, false },
-                  { false, false, false, false, true, false, false, false },
-                  { false, false, false, false, true, false, false, false },
-                  { false, false, false, false, false, false, false, false },
-             };
-
-            bool[,] huit = new bool[8, 8]
-            {
-                  {false, false, false, false, false, false, false, false},
-                  {false, false, false, true, true, false, false, false},
-                  {false, false, true, false, false, true, false, false},
-                  {false, false, false, true, true, false, false, false},
-                  {false, false, true, false, false, true, false, false},
-                  {false, false, true, false, false, true, false, false},
-                  {false, false, false, true, true, false, false, false},
-                  {false, false, false, false, false, false, false, false},
-            };
-
-            bool[,] neuf = new bool[8, 8]
-            {
-                  {false, false, false, false, false, false, false, false},
-                  {false, false, false, true, true, false, false, false},
-                  {false, false, true, false, false, true, false, false},
-                  {false, false, true, false, false, true, false, false},
-                  {false, false, false, true, true, false, false, false},
-                  {false, false, false, false, false, true, false, false},
-                  {false, false, true, true, true, true, false, false},
-                  {false, false, false, false, false, false, false, false},
-            };
-
-
-
-
-
-            bool[,] croix = new bool[8, 8]
-            {
-                      { true, false, false, false, false, false, false, true },
-                      { false, true, false, false, false, false, true, false },
-                      { false, false, true, false, false, true, false, false },
-                      { false, false, false, true, true, false, false, false },
-                      { false, false, false, true, true, false, false, false },
-                      { false, false, true, false, false, true, false, false },
-                      { false, true, false, false, false, false, true, false },
-                      { true, false, false, false, false, false, false, true },
-            };
-            #endregion mapping
-
             List<bool[,]> dico1 = new List<bool[,]>();
-
-            dico1.Add(x ? un : croix);
-            dico1.Add(x ? deux : croix);
-            dico1.Add(x ? trois : croix);
-            dico1.Add(x ? quatre : croix);
-            dico1.Add(x ? cinq : croix);
-
+            dico1.Add(x ? Definition.un : Definition.croix);
+            dico1.Add(x ? Definition.deux : Definition.croix);
+            dico1.Add(x ? Definition.trois : Definition.croix);
+            dico1.Add(x ? Definition.quatre : Definition.croix);
+            dico1.Add(x ? Definition.cinq : Definition.croix);
             vmLayout.Apply1(dico1);
 
             List<bool[,]> dico2 = new List<bool[,]>();
-            dico2.Add(x ? six : croix);
-            dico2.Add(x ? sept : croix);
-            dico2.Add(x ? huit : croix);
-            dico2.Add(x ? neuf : croix);
-            dico2.Add(x ? zero : croix);
+            dico2.Add(x ? Definition.six : Definition.croix);
+            dico2.Add(x ? Definition.sept : Definition.croix);
+            dico2.Add(x ? Definition.huit : Definition.croix);
+            dico2.Add(x ? Definition.neuf : Definition.croix);
+            dico2.Add(x ? Definition.zero : Definition.croix);
             vmLayout.Apply2(dico2);
 
-           
             x = !x;
         }
 
@@ -341,7 +190,7 @@ namespace LedGeekBox
                 offsetstatic = 0;
             }
 
-            Thread.Sleep(period*2);
+            Thread.Sleep(period * 2);
 
             for (int o = 0; o <= offsetstatic; o++)
             {
@@ -366,15 +215,18 @@ namespace LedGeekBox
                         current = new bool[8, 8];
                         smallindex = 0;
                     }
-                    current[0, smallindex] = mainmessage[0, index];
-                    current[1, smallindex] = mainmessage[1, index];
-                    current[2, smallindex] = mainmessage[2, index];
-                    current[3, smallindex] = mainmessage[3, index];
+                    if (i < totallenght)
+                    {
+                        current[0, smallindex] = mainmessage[0, index];
+                        current[1, smallindex] = mainmessage[1, index];
+                        current[2, smallindex] = mainmessage[2, index];
+                        current[3, smallindex] = mainmessage[3, index];
 
-                    current[4, smallindex] = mainmessage[4, index];
-                    current[5, smallindex] = mainmessage[5, index];
-                    current[6, smallindex] = mainmessage[6, index];
-                    current[7, smallindex] = mainmessage[7, index];
+                        current[4, smallindex] = mainmessage[4, index];
+                        current[5, smallindex] = mainmessage[5, index];
+                        current[6, smallindex] = mainmessage[6, index];
+                        current[7, smallindex] = mainmessage[7, index];
+                    }
 
                     smallindex++;
 
