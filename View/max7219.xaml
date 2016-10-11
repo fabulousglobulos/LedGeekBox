@@ -1,11 +1,12 @@
-﻿<UserControl x:Class="LedGeekBox.max7219"
+﻿<UserControl x:Class="LedGeekBox.View.max7219"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LedGeekBox"
              mc:Ignorable="d" 
-             xmlns:Converters ="clr-namespace:LedGeekBox.Converters"
+             xmlns:viewModel="clr-namespace:LedGeekBox.ViewModel"
+             xmlns:view="clr-namespace:LedGeekBox.View"
              d:DesignHeight="180" d:DesignWidth="180">
     
     <UserControl.Resources>
@@ -14,11 +15,12 @@
             <Setter Property="Width" Value="20"/>
         </Style>
         </UserControl.Resources>
-    <UserControl.DataContext><local:ViewModelMax7219></local:ViewModelMax7219></UserControl.DataContext>
+    <!--<UserControl.DataContext><viewModel:ViewModelMax7219></viewModel:ViewModelMax7219></UserControl.DataContext>-->
     
     <Grid>
         <Grid.Resources>
-            <Converters:ColorToBrushConverter x:Key="ColorToBrushConverter"></Converters:ColorToBrushConverter>
+            <view:ColorToBrushConverter x:Key="ColorToBrushConverter"></view:ColorToBrushConverter>
+            <!--<view:ColorToBrushConverter x:Key="ColorToBrushConverter"></view:ColorToBrushConverter>-->
         </Grid.Resources>
         <StackPanel HorizontalAlignment="Left" Height="Auto" Margin="00" VerticalAlignment="Top" Width="Auto" Orientation="Vertical">
             <StackPanel HorizontalAlignment="Left" Height="Auto" Margin="0" VerticalAlignment="Top" Width="Auto" Orientation="Horizontal" Name="A">

@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using LedGeekBox.Model.Scenario;
 
-namespace LedGeekBox
+namespace LedGeekBox.ViewModel
 {
-    public class ViewModelMaxLayout : INotifyPropertyChanged
+    public class ViewModelMaxLayout : INotifyPropertyChanged , IStep
     {
         ViewModelMax7219 vm1 = null;
         ViewModelMax7219 vm2 = null;
@@ -48,9 +49,21 @@ namespace LedGeekBox
                 handlers(this, args);
             }
         }
-        
 
-        public void Apply1(List< bool[,]> datas)
+
+        public void Apply(List<bool[,]> datas, bool firstrow)
+        {
+            if (firstrow)
+            {
+                Apply1(datas);
+            }
+            else
+            {
+                Apply2(datas);
+            }
+        }
+
+        private void Apply1(List< bool[,]> datas)
         {
             CheckConstraint(datas);
 
@@ -62,7 +75,7 @@ namespace LedGeekBox
             vm5.Apply(datas[4]);
         }
 
-        public void Apply2(List<  bool[,]> datas)
+        private void Apply2(List<  bool[,]> datas)
         {
             CheckConstraint(datas);
 

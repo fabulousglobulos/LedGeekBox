@@ -1,4 +1,4 @@
-﻿namespace LedGeekBox
+﻿namespace LedGeekBox.Model
 {
     public class Definition
     {

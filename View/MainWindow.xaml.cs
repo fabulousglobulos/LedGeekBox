@@ -17,10 +17,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml;
+using LedGeekBox.ViewModel;
 using Size = System.Windows.Size;
 
 
-namespace LedGeekBox
+namespace LedGeekBox.View
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml

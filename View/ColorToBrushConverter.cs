@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace LedGeekBox.Converters
+namespace LedGeekBox.View
 {
     public class ColorToBrushConverter : IValueConverter
     {

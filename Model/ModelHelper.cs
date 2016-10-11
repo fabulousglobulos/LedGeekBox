@@ -4,10 +4,11 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using LedGeekBox.Model.Scenario;
 
-namespace LedGeekBox
+namespace LedGeekBox.Model
 {
-    public static class Model
+    public static class ModelHelper
     {
         private readonly static int period = 200;
 
@@ -56,7 +57,24 @@ namespace LedGeekBox
         }
 
 
-        public static void Rendering(string whatToWrite, ViewModelMaxLayout vm, bool firstline)
+        public static void RenderingGeneric(object param)
+        {
+            ThreadObject typedParam = param as ThreadObject;
+           // List<bool[,]> result = null;
+
+            Rendering(typedParam.WhatToWrite, typedParam.ViewModel, typedParam.FirstLine);
+
+            //if (typedParam.Reverse)
+            //{
+            //    Rendering(typedParam.WhatToWrite, typedParam.ViewModel, typedParam.FirstLine);
+            //}
+            //else
+            //{
+            //    Rendering(typedParam.WhatToWrite, typedParam.ViewModel, typedParam.FirstLine);
+            //}
+        }
+
+        static void Rendering(string whatToWrite, IStep stp, bool firstline)
         {
             int totallenght = 0;
             List<bool[,]> msg = whatToWrite.ToList().Select(x =>
@@ -66,7 +84,7 @@ namespace LedGeekBox
                 return y;
             }).ToList();
 
-            log(msg);
+            //log(msg);
 
             bool[,] mainmessage = new bool[8, totallenght];
             int localcursor = 0;
@@ -97,11 +115,6 @@ namespace LedGeekBox
                 }
                 if (final > 0)
                 {
-                    //  var  mainmessage2 = new bool[8, totallenght+ final];
-
-                    //    Array.Copy(mainmessage,0, mainmessage2, final, totallenght );
-
-                    //mainmessage.CopyTo(mainmessage2, final);
                     var vincent = Merge(new bool[8, final], mainmessage);
 
                     mainmessage = vincent;
@@ -161,7 +174,6 @@ namespace LedGeekBox
                     {
                         z.Add(current);
                     }
-
                 }
                 if (z.Count == 4)
                 {
@@ -175,14 +187,7 @@ namespace LedGeekBox
                 dico.Add(z.Count > 3 ? z[3] : Helper.EmptyMatrix);
                 dico.Add(z.Count > 4 ? z[4] : Helper.EmptyMatrix);
 
-                if (firstline)
-                {
-                    vm.Apply1(dico);
-                }
-                else
-                {
-                    vm.Apply2(dico);
-                }
+                stp.Apply(dico, firstline);
 
                 Thread.Sleep(period);
             }
@@ -217,10 +222,8 @@ namespace LedGeekBox
         }
 
 
-
-
-
-        public static void RenderingReverse(string whatToWrite, ViewModelMaxLayout vm, bool firstline)
+        //TODO: A IMPLEMENTER
+        static void RenderingReverse(string whatToWrite, IStep stp, bool firstline)
         {
             int totallenght = 0;
             List<bool[,]> msg = whatToWrite.ToList().Select(x =>
@@ -309,14 +312,7 @@ namespace LedGeekBox
                 dico.Add(z.Count > 3 ? z[3] : Helper.EmptyMatrix);
                 dico.Add(z.Count > 4 ? z[4] : Helper.EmptyMatrix);
 
-                if (firstline)
-                {
-                    vm.Apply1(dico);
-                }
-                else
-                {
-                    vm.Apply2(dico);
-                }
+                stp.Apply(dico, firstline);
 
                 Thread.Sleep(period);
             }

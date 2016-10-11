@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LedGeekBox.ViewModel;
 
-namespace LedGeekBox
+namespace LedGeekBox.View
 {
     /// <summary>
     /// Logique d'interaction pour MaxLayout.xaml

@@ -58,7 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="UserControl\MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -66,33 +66,36 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Definition.cs" />
-    <Compile Include="Model.cs" />
-    <Compile Include="ThreadObject.cs" />
-    <Compile Include="UserControl\ColorToBrushConverter.cs" />
-    <Compile Include="Configuration.cs" />
-    <Compile Include="UserControl\MaxLayout.xaml.cs">
+    <Compile Include="Model\Definition.cs" />
+    <Compile Include="Model\ModelHelper.cs" />
+    <Compile Include="Model\Scenario\TextScenario.cs" />
+    <Compile Include="Model\Scenario\HourScenario.cs" />
+    <Compile Include="Model\Scenario\IScenario.cs" />
+    <Compile Include="Model\ThreadObject.cs" />
+    <Compile Include="View\ColorToBrushConverter.cs" />
+    <Compile Include="Model\Configuration.cs" />
+    <Compile Include="View\MaxLayout.xaml.cs">
       <DependentUpon>MaxLayout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\RelayCommand.cs" />
-    <Compile Include="ViewModelMain.cs" />
-    <Compile Include="ViewModelMaxLayout.cs" />
-    <Compile Include="ViewModelMax7219.cs" />
-    <Compile Include="UserControl\MainWindow.xaml.cs">
+    <Compile Include="View\RelayCommand.cs" />
+    <Compile Include="ViewModel\ViewModelMain.cs" />
+    <Compile Include="ViewModel\ViewModelMaxLayout.cs" />
+    <Compile Include="ViewModel\ViewModelMax7219.cs" />
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControl\max7219.xaml">
+    <Page Include="View\max7219.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl\MaxLayout.xaml">
+    <Page Include="View\MaxLayout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserControl\max7219.xaml.cs">
+    <Compile Include="View\max7219.xaml.cs">
       <DependentUpon>max7219.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -126,6 +129,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

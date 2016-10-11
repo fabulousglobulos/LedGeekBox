@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace LedGeekBox
+namespace LedGeekBox.View
 {
     public class RelayCommand : ICommand
     {
