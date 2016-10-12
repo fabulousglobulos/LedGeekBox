@@ -2,6 +2,9 @@
 {
     public class Definition
     {
+        public static bool [,] Empty= new bool[8,8];
+
+
         public static bool[,] zero = new bool[8, 8]
        {
             {false, false, false, false, false, false, false, false},

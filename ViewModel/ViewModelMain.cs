@@ -60,6 +60,22 @@ namespace LedGeekBox.ViewModel
             }
         }
 
+
+        private string _scenariosList;
+
+        public string Scenarios
+        {
+            get { return _scenariosList; }
+            set
+            {
+                if (value != _scenariosList)
+                {
+                    _scenariosList = value;
+                    OnPropertyChanged("Scenarios");
+                }
+            }
+        }
+
         public ICommand XDisplayCommand { get; set; }
         public ICommand DisplayCustomTextCommand { get; set; }
         public ICommand DisplayHourCommand { get; set; }
@@ -110,24 +126,29 @@ namespace LedGeekBox.ViewModel
             Reverse2 = true;
             var a = Helper.Get("a");//force to load setup
 
+            Scenarios = "HOUR()" + Environment.NewLine;
+            Scenarios += "TEXT(msg1=#coucou c'est nous!;msg2=C0mment c@ v@ ? )" + Environment.NewLine;
+            Scenarios += "HOUR()" + Environment.NewLine;
+            Scenarios += "TEXT(msg1=prout;msg2=123456789 ? )" ;
         }
 
         bool x = true;
 
         private void ScenarioClick()
         {
-         Thread t = new Thread(DoScenario);
+            Thread t = new Thread(DoScenario);
             t.Start();
         }
 
 
         private void DoScenario()
         {
-            List<IScenario> scenarios = new List<IScenario>();
+            //List<IScenario> scenarios = new List<IScenario>();
 
-            scenarios.Add(new HourScenario());
-            scenarios.Add(new TextScenario());
-            scenarios.Add(new HourScenario());
+            //scenarios.Add(new HourScenario());
+            //scenarios.Add(new TextScenario());
+            //scenarios.Add(new HourScenario());
+            List<IScenario> scenarios = ScenariosFactory.Build(Scenarios);
 
             foreach (var scenario in scenarios)
             {
