@@ -29,7 +29,8 @@ namespace LedGeekBox.Model.Scenario
                         }
                         case "CLEAR":
                         {
-                            sco = new HourScenario();
+                            sco = new EmptyScenario();
+
                             break;
                         }
                     case "TEXT":
