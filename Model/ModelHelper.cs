@@ -12,7 +12,100 @@ namespace LedGeekBox.Model
     {
         private readonly static int period = 200;
 
-        private static void log(List<bool[,]> msg)
+        //public static void log(bool[,] datas)
+        //{
+        //    for (int i = 0; i < datas.GetLength(1); i++)
+        //    {
+        //        string line = "";
+        //        for (int j = 0; j < datas.GetLength(0); j++)
+        //        {
+        //            line += datas[ j,i] ? "_" : "x";
+        //        }
+        //        Trace.Write(line + Environment.NewLine);
+        //    }
+        //}
+
+
+        public static void log(bool[,] msg)
+        {
+            string line1 = "";
+            string line2 = "";
+            string line3 = "";
+            string line4 = "";
+            string line5 = "";
+            string line6 = "";
+            string line7 = "";
+            string line8 = "";
+
+            string line9 = "";
+            string line10 = "";
+            string line11 = "";
+            string line12 = "";
+            string line13 = "";
+            string line14 = "";
+            string line15 = "";
+            string line16 = "";
+
+            for (int i = 0; i < msg.GetLength(0); i++)
+            {
+                line1 += msg[i,0] ? "#" : "_";
+                line2 += msg[i,1] ? "#" : "_";
+                line3 += msg[i,2] ? "#" : "_";
+                line4 += msg[i,3] ? "#" : "_";
+                line5 += msg[i,4] ? "#" : "_";
+                line6 += msg[i,5] ? "#" : "_";
+                line7 += msg[i,6] ? "#" : "_";
+                line8 += msg[i,7] ? "#" : "_";
+
+                line9   += msg[i,08 ] ? "#" : "_";
+                line10  += msg[i,09 ] ? "#" : "_";
+                line11  += msg[i,10 ] ? "#" : "_";
+                line12  += msg[i,11 ] ? "#" : "_";
+                line13  += msg[i,12 ] ? "#" : "_";
+                line14  += msg[i,13 ] ? "#" : "_";
+                line15  += msg[i,14 ] ? "#" : "_";
+                line16  += msg[i,15 ] ? "#" : "_";
+            }
+            line1 += " ";
+            line2 += " ";
+            line3 += " ";
+            line4 += " ";
+            line5 += " ";
+            line6 += " ";
+            line7 += " ";
+            line8 += " ";
+
+            line9  += " ";
+            line10 += " ";
+            line11 += " ";
+            line12 += " ";
+            line13 += " ";
+            line14 += " ";
+            line15 += " ";
+            line16 += " ";
+
+
+            Trace.Write(line1 + Environment.NewLine);
+            Trace.Write(line2 + Environment.NewLine);
+            Trace.Write(line3 + Environment.NewLine);
+            Trace.Write(line4 + Environment.NewLine);
+            Trace.Write(line5 + Environment.NewLine);
+            Trace.Write(line6 + Environment.NewLine);
+            Trace.Write(line7 + Environment.NewLine);
+            Trace.Write(line8 + Environment.NewLine);
+
+            Trace.Write(line9  + Environment.NewLine);
+            Trace.Write(line10 + Environment.NewLine);
+            Trace.Write(line11 + Environment.NewLine);
+            Trace.Write(line12 + Environment.NewLine);
+            Trace.Write(line13 + Environment.NewLine);
+            Trace.Write(line14 + Environment.NewLine);
+            Trace.Write(line15 + Environment.NewLine);
+            Trace.Write(line16 + Environment.NewLine); 
+        }
+
+
+        public static void log(List<bool[,]> msg)
         {
             string line1 = "";
             string line2 = "";
@@ -60,7 +153,7 @@ namespace LedGeekBox.Model
         public static void RenderingGeneric(object param)
         {
             ThreadObject typedParam = param as ThreadObject;
-           // List<bool[,]> result = null;
+            // List<bool[,]> result = null;
 
             Rendering(typedParam.WhatToWrite, typedParam.ViewModel, typedParam.FirstLine);
 

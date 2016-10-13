@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -11,6 +14,7 @@ using System.Windows.Threading;
 using LedGeekBox.Model;
 using LedGeekBox.Model.Scenario;
 using LedGeekBox.View;
+using Microsoft.Win32;
 
 namespace LedGeekBox.ViewModel
 {
@@ -80,6 +84,7 @@ namespace LedGeekBox.ViewModel
         public ICommand DisplayCustomTextCommand { get; set; }
         public ICommand DisplayHourCommand { get; set; }
         public ICommand ScenarioCommand { get; set; }
+        public ICommand ImportCommand { get; set; }
 
         private bool _isChecked1;
 
@@ -120,6 +125,9 @@ namespace LedGeekBox.ViewModel
             DisplayCustomTextCommand = new RelayCommand(o => DisplayCustomTextClick());
             DisplayHourCommand = new RelayCommand(o => DisplayHourClick());
             ScenarioCommand = new RelayCommand(o => ScenarioClick());
+            ImportCommand = new RelayCommand(o => ImportClick());
+
+
             Line1 = "Hello World ! 123456";
             Line2 = "@coucou #ABC";
 
@@ -129,10 +137,130 @@ namespace LedGeekBox.ViewModel
             Scenarios = "HOUR()" + Environment.NewLine;
             Scenarios += "TEXT(msg1=#coucou c'est nous!;msg2=C0mment c@ v@ ? )" + Environment.NewLine;
             Scenarios += "HOUR()" + Environment.NewLine;
-            Scenarios += "TEXT(msg1=prout;msg2=123456789 ? )" ;
+            Scenarios += "TEXT(msg1=prout;msg2=123456789 ? )" + Environment.NewLine;
+            Scenarios += "CLEAR()" + Environment.NewLine;
         }
 
         bool x = true;
+
+        private void ImportClick()
+        {
+
+            OpenFileDialog f = new OpenFileDialog();
+            var result = f.ShowDialog();
+            string fullpath = @"e:\g.png";
+            if (result ==false)
+            {
+                return;
+            }
+            fullpath = f.FileName;
+
+           
+            var original = Image.FromFile(fullpath);
+            original = ResizePicture(original, 40, 16);
+            Bitmap bmp = new Bitmap(original);
+            var rectangle = new Rectangle(0, 0, original.Width, original.Height);
+            var bmp1bpp = bmp.Clone(rectangle, PixelFormat.Format1bppIndexed);
+            bmp1bpp.Save(@"e:\image.bmp");
+            bool[,] datas = new bool[40, 16];
+            for (int i = 0; i < bmp1bpp.Width; i++)
+            {
+                string line = string.Empty;
+                for (int j = 0; j < bmp1bpp.Height; j++)
+                {
+                    Color pixel = bmp1bpp.GetPixel(i, j);
+                    bool r = !((pixel.R == Color.White.R) && (pixel.G == Color.White.G) && (pixel.B == Color.White.B));
+                    line += r ? "x" : "_";
+                    datas[i, j] = r;
+                }
+                line += Environment.NewLine;
+            }
+            ModelHelper.log(datas);
+
+            var line1 = ConverToList(datas, true);
+            vmLayout.Apply(line1, true);
+            ModelHelper.log(line1);
+
+            var line2 = ConverToList(datas, false);
+            vmLayout.Apply(line2, false);
+            ModelHelper.log(line2);
+        }
+
+        List<bool[,]> ConverToList(bool[,] datas, bool firstline)
+        {
+            int inf = firstline ? 0 : 8;
+            //   int sup = firstline ? 7 : 15;
+            List<bool[,]> l = new List<bool[,]>();
+
+
+            for (int i = 0; i < 5; i++)
+            {
+                // l.Add(Slice(datas, i * 8, inf, i * 8 + 8, inf + 8));
+
+
+                bool[,] x = new bool[8, 8];
+                for (int j = 0; j < 8; j++)
+                {
+                    for (int k = 0; k < 8; k++)
+                    {
+                        x[ k,j] = datas[i * 8 + j, inf + k];
+                    }
+                }
+                l.Add(x);
+            }
+            return l;
+        }
+
+
+        //public static bool[,] Slice(bool[,] a, int x1, int y1, int x2, int y2)
+        //{
+        //    var result = new bool[8, 8];
+        //    for (var i = x1; i < x2; i++)
+        //    {
+        //        for (var j = y1; j < y2; j++)
+        //        {
+        //            result[i - x1, j - y1] = a[, j];
+        //            //result[i - x1, j - y1] = a[i, j];
+        //        }
+        //    }
+        //    return result;
+        //}
+
+        //public static T[,] Slice<T>(this T[,] source, int fromIdxRank0, int toIdxRank0, int fromIdxRank1, int toIdxRank1)
+        //{
+        //    T[,] ret = new T[toIdxRank0 - fromIdxRank0 + 1, toIdxRank1 - fromIdxRank1 + 1];
+
+        //    for (int srcIdxRank0 = fromIdxRank0, dstIdxRank0 = 0; srcIdxRank0 <= toIdxRank0; srcIdxRank0++, dstIdxRank0++)
+        //    {
+        //        for (int srcIdxRank1 = fromIdxRank1, dstIdxRank1 = 0; srcIdxRank1 <= toIdxRank1; srcIdxRank1++, dstIdxRank1++)
+        //        {
+        //            ret[dstIdxRank0, dstIdxRank1] = source[srcIdxRank0, srcIdxRank1];
+        //        }
+        //    }
+        //    return ret;
+        //}
+
+
+        private Bitmap ResizePicture(Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.HorizontalResolution, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+            return destImage;
+        }
 
         private void ScenarioClick()
         {
