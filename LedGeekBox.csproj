@@ -67,6 +67,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Arduino\ArduinoDriver.cs" />
     <Compile Include="Model\Definition.cs" />
     <Compile Include="Model\ModelHelper.cs" />
     <Compile Include="Model\Scenario\EmptyScenario.cs" />

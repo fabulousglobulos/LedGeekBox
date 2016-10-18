@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml;
+using LedGeekBox.Arduino;
 using LedGeekBox.ViewModel;
 using Size = System.Windows.Size;
 
@@ -32,7 +33,10 @@ namespace LedGeekBox.View
         {
             InitializeComponent();
             ViewModelMaxLayout vmLayout = maxlayout.DataContext as ViewModelMaxLayout;
-            DataContext = new ViewModelMain(vmLayout);
+            ArduinoDriver driver = new ArduinoDriver();
+            driver.Init();
+
+            DataContext = new ViewModelMain(vmLayout, driver);
         }
     }
 

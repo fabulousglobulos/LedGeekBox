@@ -9,14 +9,13 @@ namespace LedGeekBox.Model.Scenario
 {
     public class HourScenario : IScenario
     {
-
-        IStep step;
+        List<IStep> _steps;
 
         Thread t = null;
 
-        public int Start(IStep stepper)
+        public int Start(List<IStep> steps)
         {
-            step = stepper;
+            _steps = steps;
             t= new Thread(Rendering);
             t.Start();
             return 10000;
@@ -29,8 +28,8 @@ namespace LedGeekBox.Model.Scenario
                 string hour = DateTime.Now.ToString("hh:mm:ss");
                 string date = DateTime.Now.ToString("dd.MM.yy");
 
-                ModelHelper.RenderingGeneric(new ThreadObject {WhatToWrite = hour, ViewModel = step, FirstLine = true});
-                ModelHelper.RenderingGeneric(new ThreadObject {WhatToWrite = date, ViewModel = step, FirstLine = false});
+                ModelHelper.RenderingGeneric(new ThreadObject {WhatToWrite = hour, Steps = _steps, FirstLine = true});
+                ModelHelper.RenderingGeneric(new ThreadObject {WhatToWrite = date, Steps = _steps, FirstLine = false});
             } while (true);
         }
 

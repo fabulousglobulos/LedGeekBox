@@ -12,19 +12,6 @@ namespace LedGeekBox.Model
     {
         private readonly static int period = 200;
 
-        //public static void log(bool[,] datas)
-        //{
-        //    for (int i = 0; i < datas.GetLength(1); i++)
-        //    {
-        //        string line = "";
-        //        for (int j = 0; j < datas.GetLength(0); j++)
-        //        {
-        //            line += datas[ j,i] ? "_" : "x";
-        //        }
-        //        Trace.Write(line + Environment.NewLine);
-        //    }
-        //}
-
 
         public static void log(bool[,] msg)
         {
@@ -155,7 +142,7 @@ namespace LedGeekBox.Model
             ThreadObject typedParam = param as ThreadObject;
             // List<bool[,]> result = null;
 
-            Rendering(typedParam.WhatToWrite, typedParam.ViewModel, typedParam.FirstLine);
+            Rendering(typedParam.WhatToWrite, typedParam.Steps, typedParam.FirstLine);
 
             //if (typedParam.Reverse)
             //{
@@ -167,7 +154,7 @@ namespace LedGeekBox.Model
             //}
         }
 
-        static void Rendering(string whatToWrite, IStep stp, bool firstline)
+        static void Rendering(string whatToWrite, List<IStep> stp, bool firstline)
         {
             int totallenght = 0;
             List<bool[,]> msg = whatToWrite.ToList().Select(x =>
@@ -280,7 +267,7 @@ namespace LedGeekBox.Model
                 dico.Add(z.Count > 3 ? z[3] : Helper.EmptyMatrix);
                 dico.Add(z.Count > 4 ? z[4] : Helper.EmptyMatrix);
 
-                stp.Apply(dico, firstline);
+                stp.ForEach (s => s.Apply(dico, firstline));
 
                 Thread.Sleep(period);
             }

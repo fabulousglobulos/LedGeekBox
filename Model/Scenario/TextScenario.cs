@@ -19,19 +19,19 @@ namespace LedGeekBox.Model.Scenario
             msg2 = line2;
         }
 
-        IStep step;
+        List<IStep> _steps;
 
         Thread t1 = null;
         Thread t2 = null;
 
-        public int Start(IStep stepper)
+        public int Start(List<IStep> steps)
         {
-            step = stepper;
+            _steps = steps;
             t1 = new Thread(ModelHelper.RenderingGeneric);
-            t1.Start(new ThreadObject { WhatToWrite = msg1, ViewModel = step, FirstLine = true });
+            t1.Start(new ThreadObject { WhatToWrite = msg1, Steps = _steps, FirstLine = true });
 
             t2 = new Thread(ModelHelper.RenderingGeneric);
-            t2.Start(new ThreadObject { WhatToWrite = msg2, ViewModel = step, FirstLine = false });
+            t2.Start(new ThreadObject { WhatToWrite = msg2, Steps = _steps, FirstLine = false });
 
             return 10000;
         }

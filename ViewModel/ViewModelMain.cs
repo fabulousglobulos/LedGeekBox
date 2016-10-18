@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using LedGeekBox.Arduino;
 using LedGeekBox.Model;
 using LedGeekBox.Model.Scenario;
 using LedGeekBox.View;
@@ -116,11 +117,16 @@ namespace LedGeekBox.ViewModel
             }
         }
 
-        private ViewModelMaxLayout vmLayout;
+        //private ViewModelMaxLayout vmLayout;
+        //private ArduinoDriver arduino;
+        private List<IStep> steps = null;
 
-        public ViewModelMain(ViewModelMaxLayout vm)
+
+        public ViewModelMain(ViewModelMaxLayout vm, ArduinoDriver arduinoController)
         {
-            vmLayout = vm;
+            steps = new List<IStep> {vm, arduinoController};
+            //vmLayout = vm;
+            //arduino = arduinoController;
             XDisplayCommand = new RelayCommand(o => XDisplayClick());
             DisplayCustomTextCommand = new RelayCommand(o => DisplayCustomTextClick());
             DisplayHourCommand = new RelayCommand(o => DisplayHourClick());
@@ -178,11 +184,11 @@ namespace LedGeekBox.ViewModel
             ModelHelper.log(datas);
 
             var line1 = ConverToList(datas, true);
-            vmLayout.Apply(line1, true);
+            steps.ForEach(x=>x.Apply(line1, true));
             ModelHelper.log(line1);
 
             var line2 = ConverToList(datas, false);
-            vmLayout.Apply(line2, false);
+            steps.ForEach(x => x.Apply(line2, false));
             ModelHelper.log(line2);
         }
 
@@ -210,35 +216,6 @@ namespace LedGeekBox.ViewModel
             }
             return l;
         }
-
-
-        //public static bool[,] Slice(bool[,] a, int x1, int y1, int x2, int y2)
-        //{
-        //    var result = new bool[8, 8];
-        //    for (var i = x1; i < x2; i++)
-        //    {
-        //        for (var j = y1; j < y2; j++)
-        //        {
-        //            result[i - x1, j - y1] = a[, j];
-        //            //result[i - x1, j - y1] = a[i, j];
-        //        }
-        //    }
-        //    return result;
-        //}
-
-        //public static T[,] Slice<T>(this T[,] source, int fromIdxRank0, int toIdxRank0, int fromIdxRank1, int toIdxRank1)
-        //{
-        //    T[,] ret = new T[toIdxRank0 - fromIdxRank0 + 1, toIdxRank1 - fromIdxRank1 + 1];
-
-        //    for (int srcIdxRank0 = fromIdxRank0, dstIdxRank0 = 0; srcIdxRank0 <= toIdxRank0; srcIdxRank0++, dstIdxRank0++)
-        //    {
-        //        for (int srcIdxRank1 = fromIdxRank1, dstIdxRank1 = 0; srcIdxRank1 <= toIdxRank1; srcIdxRank1++, dstIdxRank1++)
-        //        {
-        //            ret[dstIdxRank0, dstIdxRank1] = source[srcIdxRank0, srcIdxRank1];
-        //        }
-        //    }
-        //    return ret;
-        //}
 
 
         private Bitmap ResizePicture(Image image, int width, int height)
@@ -280,7 +257,7 @@ namespace LedGeekBox.ViewModel
 
             foreach (var scenario in scenarios)
             {
-                int wait = scenario.Start(vmLayout);
+                int wait = scenario.Start(steps);
                 Thread.Sleep(wait);
                 scenario.Stop();
             }
@@ -291,8 +268,8 @@ namespace LedGeekBox.ViewModel
             string hour = DateTime.Now.ToString("hh:mm:ss");
             string date = DateTime.Now.ToString("dd.MM.yy");
 
-            ModelHelper.RenderingGeneric(new ThreadObject { WhatToWrite = hour, ViewModel = vmLayout, FirstLine = true });
-            ModelHelper.RenderingGeneric(new ThreadObject { WhatToWrite = date, ViewModel = vmLayout, FirstLine = false });
+            ModelHelper.RenderingGeneric(new ThreadObject { WhatToWrite = hour, Steps = steps, FirstLine = true });
+            ModelHelper.RenderingGeneric(new ThreadObject { WhatToWrite = date, Steps = steps, FirstLine = false });
         }
 
 
@@ -304,7 +281,7 @@ namespace LedGeekBox.ViewModel
             dico1.Add(x ? Definition.trois : Definition.croix);
             dico1.Add(x ? Definition.quatre : Definition.croix);
             dico1.Add(x ? Definition.cinq : Definition.croix);
-            vmLayout.Apply(dico1, true);
+            steps.ForEach(x=> x.Apply(dico1, true));
 
             List<bool[,]> dico2 = new List<bool[,]>();
             dico2.Add(x ? Definition.six : Definition.croix);
@@ -312,7 +289,7 @@ namespace LedGeekBox.ViewModel
             dico2.Add(x ? Definition.huit : Definition.croix);
             dico2.Add(x ? Definition.neuf : Definition.croix);
             dico2.Add(x ? Definition.zero : Definition.croix);
-            vmLayout.Apply(dico2, false);
+            steps.ForEach(x => x.Apply(dico2, false));
 
             x = !x;
         }
@@ -321,11 +298,11 @@ namespace LedGeekBox.ViewModel
         private void DisplayCustomTextClick()
         {
             Thread t1 = new Thread(ModelHelper.RenderingGeneric);
-            t1.Start(new ThreadObject { WhatToWrite = Line1, ViewModel = vmLayout, FirstLine = true, Reverse = Reverse1 });
+            t1.Start(new ThreadObject { WhatToWrite = Line1, Steps = steps, FirstLine = true, Reverse = Reverse1 });
 
 
             Thread t2 = new Thread(ModelHelper.RenderingGeneric);
-            t2.Start(new ThreadObject { WhatToWrite = Line2, ViewModel = vmLayout, FirstLine = false, Reverse = Reverse2 });
+            t2.Start(new ThreadObject { WhatToWrite = Line2, Steps = steps, FirstLine = false, Reverse = Reverse2 });
         }
 
 

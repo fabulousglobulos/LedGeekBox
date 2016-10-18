@@ -9,16 +9,20 @@ namespace LedGeekBox.Model.Scenario
 {
     public class EmptyScenario : IScenario
     {
-        IStep step;
+        List<IStep> _steps;
 
 
-        public int Start(IStep stepper)
+        public int Start(List<IStep> steps)
         {
-            step = stepper;
+            _steps = steps;
             var emptys = new List<bool[,]> {Definition.Empty, Definition.Empty, Definition.Empty, Definition.Empty, Definition.Empty };
 
-            stepper.Apply(emptys,true);
-            stepper.Apply(emptys, false);
+            foreach (IStep step in steps)
+            {
+                step.Apply(emptys, true);
+                step.Apply(emptys, false);
+            }
+            
             return 1000;
         }
 

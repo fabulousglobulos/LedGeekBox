@@ -10,7 +10,7 @@ namespace LedGeekBox.Model.Scenario
 
     public interface IScenario
     {
-        int Start(IStep stepper);
+        int Start(List<IStep> steps);
         void Stop();
     }
 }
