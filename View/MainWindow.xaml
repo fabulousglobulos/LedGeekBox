@@ -33,7 +33,7 @@
 
         <Button Command="{Binding Path=ImportCommand}" Grid.Row="1" Grid.Column="2" Height="20"  Content="Import" HorizontalAlignment="Center"></Button>
 
-
+        <CheckBox IsChecked="{Binding Path=IsSimulation}" Grid.Row="1" Grid.Column="3" Content="Simulation" HorizontalAlignment="Center" />
 
         <!--  marquee message -->
         <Button Command="{Binding Path=DisplayCustomTextCommand}" Grid.Row="2" Grid.Column="0" Height="20" Content="Custom" HorizontalAlignment="Center" />

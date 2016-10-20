@@ -13,7 +13,7 @@ namespace LedGeekBox.Arduino
 
     public interface IArduino
     {
-        bool Init(string port, int rate);
+        //bool Init(string port, int rate);
         void Close();
         //void Write(Dictionary<int, List<byte>> datas);
         void Apply(List<bool[,]> datas, bool firstline);
@@ -25,8 +25,18 @@ namespace LedGeekBox.Arduino
         private bool _havebeeninit = false;
         SerialPort serial;
 
-        public bool Init(string port = "COM4", int rate = 115200)
+        public bool Simulation
         {
+            get; set;
+        }
+
+        private  bool Init(string port = "COM4", int rate = 115200)
+        {
+            if (Simulation)
+            {
+                return true;
+            }
+
             if (_havebeeninit == true)
             {
                 return _havebeeninit;
@@ -47,9 +57,14 @@ namespace LedGeekBox.Arduino
 
         public void Apply(List<bool[,]> rawdatas, bool firstrow)
         {
-            if (_havebeeninit == false)
+            if( Simulation)
             {
                 return;
+            }
+
+            if (_havebeeninit == false)
+            {
+                Init();
             }
 
             Dictionary < int, List < int >> dico = new Dictionary<int, List<int>>();
@@ -144,38 +159,38 @@ namespace LedGeekBox.Arduino
         }
 
 
-        public string HelloWorld()
-        {
-            try
-            {
-                //The below setting are for the Hello handshake
-                byte[] buffer = new byte[5];
-                buffer[0] = Convert.ToByte(16);
-                buffer[1] = Convert.ToByte(128);
-                buffer[2] = Convert.ToByte(0);
-                buffer[3] = Convert.ToByte(0);
-                buffer[4] = Convert.ToByte(4);
-                int intReturnASCII = 0;
-                char charReturnValue = (Char)intReturnASCII;
+        //public string HelloWorld()
+        //{
+        //    try
+        //    {
+        //        //The below setting are for the Hello handshake
+        //        byte[] buffer = new byte[5];
+        //        buffer[0] = Convert.ToByte(16);
+        //        buffer[1] = Convert.ToByte(128);
+        //        buffer[2] = Convert.ToByte(0);
+        //        buffer[3] = Convert.ToByte(0);
+        //        buffer[4] = Convert.ToByte(4);
+        //        int intReturnASCII = 0;
+        //        char charReturnValue = (Char)intReturnASCII;
 
-                serial.Write(buffer, 0, 5);
-                Thread.Sleep(1000);
-                int count = serial.BytesToRead;
-                string returnMessage = "";
-                while (count > 0)
-                {
-                    intReturnASCII = serial.ReadByte();
-                    returnMessage = returnMessage + Convert.ToChar(intReturnASCII);
-                    count--;
-                }
+        //        serial.Write(buffer, 0, 5);
+        //        Thread.Sleep(1000);
+        //        int count = serial.BytesToRead;
+        //        string returnMessage = "";
+        //        while (count > 0)
+        //        {
+        //            intReturnASCII = serial.ReadByte();
+        //            returnMessage = returnMessage + Convert.ToChar(intReturnASCII);
+        //            count--;
+        //        }
 
-                return returnMessage;
+        //        return returnMessage;
 
-            }
-            catch (Exception e)
-            {
-                return string.Empty;
-            }
-        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return string.Empty;
+        //    }
+        //}
     }
 }

@@ -33,10 +33,7 @@ namespace LedGeekBox.View
         {
             InitializeComponent();
             ViewModelMaxLayout vmLayout = maxlayout.DataContext as ViewModelMaxLayout;
-            ArduinoDriver driver = new ArduinoDriver();
-            driver.Init();
-
-            DataContext = new ViewModelMain(vmLayout, driver);
+            DataContext = new ViewModelMain(vmLayout);
         }
     }
 

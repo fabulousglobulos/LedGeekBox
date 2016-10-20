@@ -81,6 +81,24 @@ namespace LedGeekBox.ViewModel
             }
         }
 
+        private bool _isSimulation;
+
+        public bool IsSimulation
+        {
+            get { return _isSimulation; }
+            set
+            {
+                if (value != _isSimulation)
+                {
+                    _isSimulation = value;
+                    arduino.Simulation = value;
+                    OnPropertyChanged("IsSimulation");
+                }
+            }
+        }
+
+
+
         public ICommand XDisplayCommand { get; set; }
         public ICommand DisplayCustomTextCommand { get; set; }
         public ICommand DisplayHourCommand { get; set; }
@@ -121,10 +139,11 @@ namespace LedGeekBox.ViewModel
         //private ArduinoDriver arduino;
         private List<IStep> steps = null;
 
+        ArduinoDriver arduino = new ArduinoDriver();
 
-        public ViewModelMain(ViewModelMaxLayout vm, ArduinoDriver arduinoController)
+        public ViewModelMain(ViewModelMaxLayout vm)
         {
-            steps = new List<IStep> {vm, arduinoController};
+            steps = new List<IStep> {vm, arduino };
             //vmLayout = vm;
             //arduino = arduinoController;
             XDisplayCommand = new RelayCommand(o => XDisplayClick());
@@ -136,7 +155,7 @@ namespace LedGeekBox.ViewModel
 
             Line1 = "Hello World ! 123456";
             Line2 = "@coucou #ABC";
-
+            IsSimulation = true;
             Reverse2 = true;
             var a = Helper.Get("a");//force to load setup
 
