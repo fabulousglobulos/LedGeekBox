@@ -202,36 +202,46 @@ namespace LedGeekBox.ViewModel
             }
             ModelHelper.log(datas);
 
-            var line1 = ConverToList(datas, true);
-            steps.ForEach(x=>x.Apply(line1, true));
+            var line1 = ConverToList(datas);
+            steps.ForEach(x=>x.Apply(line1));
             ModelHelper.log(line1);
 
-            var line2 = ConverToList(datas, false);
-            steps.ForEach(x => x.Apply(line2, false));
-            ModelHelper.log(line2);
+            //var line2 = ConverToList(datas, false);
+            //steps.ForEach(x => x.Apply(line2, false));
+            //ModelHelper.log(line2);
         }
 
-        List<bool[,]> ConverToList(bool[,] datas, bool firstline)
+        List<bool[,]> ConverToList(bool[,] datas)
         {
-            int inf = firstline ? 0 : 8;
-            //   int sup = firstline ? 7 : 15;
-            List<bool[,]> l = new List<bool[,]>();
+           // int inf = firstline ? 0 : 8;
 
+            List<bool[,]> l = new List<bool[,]>();
 
             for (int i = 0; i < 5; i++)
             {
-                // l.Add(Slice(datas, i * 8, inf, i * 8 + 8, inf + 8));
-
-
-                bool[,] x = new bool[8, 8];
-                for (int j = 0; j < 8; j++)
                 {
-                    for (int k = 0; k < 8; k++)
+                    bool[,] x = new bool[8, 8];
+                    for (int j = 0; j < 8; j++)
                     {
-                        x[ k,j] = datas[i * 8 + j, inf + k];
+                        for (int k = 0; k < 8; k++)
+                        {
+                            x[k, j] = datas[i*8 + j, k]; //TODO verifier // int inf = firstline ? 0 : 8;
+                        }
                     }
+                    l.Add(x);
                 }
-                l.Add(x);
+
+                {
+                    bool[,] x2 = new bool[8, 8];
+                    for (int j = 0; j < 8; j++)
+                    {
+                        for (int k = 0; k < 8; k++)
+                        {
+                            x2[k, j] = datas[i*8 + j, 8 + k]; //TODO verifier // int inf = firstline ? 0 : 8;
+                        }
+                    }
+                    l.Add(x2);
+                }
             }
             return l;
         }
@@ -287,8 +297,7 @@ namespace LedGeekBox.ViewModel
             string hour = DateTime.Now.ToString("hh:mm:ss");
             string date = DateTime.Now.ToString("dd.MM.yy");
 
-            ModelHelper.RenderingGeneric(new ThreadObject { WhatToWrite = hour, Steps = steps, FirstLine = true });
-            ModelHelper.RenderingGeneric(new ThreadObject { WhatToWrite = date, Steps = steps, FirstLine = false });
+            ModelHelper.RenderingGeneric(new ThreadObject { WhatToWrite1 = hour, WhatToWrite2 = date, Steps = steps,  });
         }
 
 
@@ -300,15 +309,14 @@ namespace LedGeekBox.ViewModel
             dico1.Add(x ? Definition.trois : Definition.croix);
             dico1.Add(x ? Definition.quatre : Definition.croix);
             dico1.Add(x ? Definition.cinq : Definition.croix);
-            steps.ForEach(x=> x.Apply(dico1, true));
 
-            List<bool[,]> dico2 = new List<bool[,]>();
-            dico2.Add(x ? Definition.six : Definition.croix);
-            dico2.Add(x ? Definition.sept : Definition.croix);
-            dico2.Add(x ? Definition.huit : Definition.croix);
-            dico2.Add(x ? Definition.neuf : Definition.croix);
-            dico2.Add(x ? Definition.zero : Definition.croix);
-            steps.ForEach(x => x.Apply(dico2, false));
+            dico1.Add(x ? Definition.six : Definition.croix);
+            dico1.Add(x ? Definition.sept : Definition.croix);
+            dico1.Add(x ? Definition.huit : Definition.croix);
+            dico1.Add(x ? Definition.neuf : Definition.croix);
+            dico1.Add(x ? Definition.zero : Definition.croix);
+
+            steps.ForEach(x=> x.Apply(dico1));
 
             x = !x;
         }
@@ -317,29 +325,8 @@ namespace LedGeekBox.ViewModel
         private void DisplayCustomTextClick()
         {
             Thread t1 = new Thread(ModelHelper.RenderingGeneric);
-            t1.Start(new ThreadObject { WhatToWrite = Line1, Steps = steps, FirstLine = true, Reverse = Reverse1 });
-
-
-            Thread t2 = new Thread(ModelHelper.RenderingGeneric);
-            t2.Start(new ThreadObject { WhatToWrite = Line2, Steps = steps, FirstLine = false, Reverse = Reverse2 });
+            t1.Start(new ThreadObject { WhatToWrite1 = Line1, WhatToWrite2 = Line2 ,Steps = steps,  Reverse = Reverse1 });
         }
-
-
-
-
-        //private void RenderingGeneric(object param)
-        //{
-        //    ThreadObject typedParam = param as ThreadObject;
-        //    if (typedParam.Reverse)
-        //    {
-        //        Model.RenderingReverse(typedParam.WhatToWrite, typedParam.ViewModel, typedParam.FirstLine);
-        //    }
-        //    else
-        //    {
-        //        Model.Rendering(typedParam.WhatToWrite, typedParam.ViewModel, typedParam.FirstLine);
-        //    }
-        //}
-
 
     }
 

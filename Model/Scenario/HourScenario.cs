@@ -28,8 +28,7 @@ namespace LedGeekBox.Model.Scenario
                 string hour = DateTime.Now.ToString("hh:mm:ss");
                 string date = DateTime.Now.ToString("dd.MM.yy");
 
-                ModelHelper.RenderingGeneric(new ThreadObject {WhatToWrite = hour, Steps = _steps, FirstLine = true});
-                ModelHelper.RenderingGeneric(new ThreadObject {WhatToWrite = date, Steps = _steps, FirstLine = false});
+                ModelHelper.RenderingGeneric(new ThreadObject {WhatToWrite1 = hour,  WhatToWrite2  =  date,  Steps = _steps});
             } while (true);
         }
 

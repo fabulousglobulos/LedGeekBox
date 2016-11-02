@@ -5,7 +5,7 @@ namespace LedGeekBox.Model.Scenario
 
     public interface IStep
     {
-        void Apply(List< bool[,]> datas , bool firstline);
+        void Apply(List<bool[,]> datas);
     }
 
     public interface IScenario

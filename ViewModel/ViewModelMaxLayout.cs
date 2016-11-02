@@ -51,45 +51,52 @@ namespace LedGeekBox.ViewModel
         }
 
 
-        public void Apply(List<bool[,]> datas, bool firstrow)
-        {
-            if (firstrow)
-            {
-                Apply1(datas);
-            }
-            else
-            {
-                Apply2(datas);
-            }
-        }
-
-        private void Apply1(List< bool[,]> datas)
+        public void Apply(List<bool[,]> datas)
         {
             CheckConstraint(datas);
 
             vm1.Apply(datas[0]);
             vm2.Apply(datas[1]);
             vm3.Apply(datas[2]);
-
             vm4.Apply(datas[3]);
             vm5.Apply(datas[4]);
+
+            vm6.Apply(datas[5]);
+            vm7.Apply(datas[6]);
+            vm8.Apply(datas[7]);
+            vm9.Apply(datas[8]);
+            vm10.Apply(datas[9]);
+            vm10.Apply(datas[9]);
         }
 
-        private void Apply2(List<  bool[,]> datas)
-        {
-            CheckConstraint(datas);
+        
+        //private void Apply1(List< bool[,]> datas)
+        //{
+        //    CheckConstraint(datas);
 
-            vm6.Apply(datas[0]);
-            vm7.Apply(datas[1]);
-            vm8.Apply(datas[2]);
+        //    vm1.Apply(datas[0]);
+        //    vm2.Apply(datas[1]);
+        //    vm3.Apply(datas[2]);
 
-            vm9.Apply(datas[3]);
-            vm10.Apply(datas[4]);
-        }
+        //    vm4.Apply(datas[3]);
+        //    vm5.Apply(datas[4]);
+        //}
+
+        //private void Apply2(List<  bool[,]> datas)
+        //{
+        //    CheckConstraint(datas);
+
+        //    vm6.Apply(datas[0]);
+        //    vm7.Apply(datas[1]);
+        //    vm8.Apply(datas[2]);
+
+        //    vm9.Apply(datas[3]);
+        //    vm10.Apply(datas[4]);
+        //}
 
         private void CheckConstraint(List<bool[,]> datas)
         {
-            if (datas == null || datas.Count != 5)
+            if (datas == null || datas.Count != 10)
             {
                 throw new ArgumentException("not enough data in input");
             }

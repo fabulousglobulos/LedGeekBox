@@ -19,8 +19,7 @@ namespace LedGeekBox.Model.Scenario
 
             foreach (IStep step in steps)
             {
-                step.Apply(emptys, true);
-                step.Apply(emptys, false);
+                step.Apply(emptys);
             }
             
             return ModelHelper.period;

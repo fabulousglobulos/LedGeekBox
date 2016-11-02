@@ -28,10 +28,10 @@ namespace LedGeekBox.Model.Scenario
         {
             _steps = steps;
             t1 = new Thread(ModelHelper.RenderingGeneric);
-            t1.Start(new ThreadObject { WhatToWrite = msg1, Steps = _steps, FirstLine = true });
+            t1.Start(new ThreadObject { WhatToWrite1 = msg1, WhatToWrite2 =  msg2,  Steps = _steps});
 
-            t2 = new Thread(ModelHelper.RenderingGeneric);
-            t2.Start(new ThreadObject { WhatToWrite = msg2, Steps = _steps, FirstLine = false });
+            //t2 = new Thread(ModelHelper.RenderingGeneric);
+            //t2.Start(new ThreadObject { WhatToWrite = msg2, Steps = _steps, FirstLine = false });
 
             return ModelHelper.period* 100;
         }
