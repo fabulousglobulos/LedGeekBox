@@ -33,7 +33,7 @@ namespace LedGeekBox.Model.Scenario
             t2 = new Thread(ModelHelper.RenderingGeneric);
             t2.Start(new ThreadObject { WhatToWrite = msg2, Steps = _steps, FirstLine = false });
 
-            return 10000;
+            return ModelHelper.period;
         }
 
 

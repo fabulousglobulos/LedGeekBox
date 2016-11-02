@@ -57,6 +57,11 @@ namespace LedGeekBox.Arduino
 
         public void Apply(List<bool[,]> rawdatas, bool firstrow)
         {
+            if (!firstrow)
+            {
+                return;
+            }
+
             if( Simulation)
             {
                 return;
@@ -153,6 +158,7 @@ namespace LedGeekBox.Arduino
                 }
             }
 
+            final = "A" + final + "B";
             byte[] buffer = Encoding.ASCII.GetBytes(final);
 
             serial.Write(buffer, 0, buffer.Length);

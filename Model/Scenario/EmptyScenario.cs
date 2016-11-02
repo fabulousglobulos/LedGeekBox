@@ -23,7 +23,7 @@ namespace LedGeekBox.Model.Scenario
                 step.Apply(emptys, false);
             }
             
-            return 1000;
+            return ModelHelper.period;
         }
 
        

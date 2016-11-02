@@ -10,7 +10,7 @@ namespace LedGeekBox.Model
 {
     public static class ModelHelper
     {
-        private readonly static int period = 200;
+        public readonly static int period = 100;
 
 
         public static void log(bool[,] msg)

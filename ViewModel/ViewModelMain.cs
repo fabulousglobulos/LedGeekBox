@@ -155,7 +155,7 @@ namespace LedGeekBox.ViewModel
 
             Line1 = "Hello World ! 123456";
             Line2 = "@coucou #ABC";
-            IsSimulation = true;
+            IsSimulation = false;
             Reverse2 = true;
             var a = Helper.Get("a");//force to load setup
 
