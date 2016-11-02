@@ -18,7 +18,7 @@ namespace LedGeekBox.Model.Scenario
             _steps = steps;
             t= new Thread(Rendering);
             t.Start();
-            return ModelHelper.period;
+            return ModelHelper.period*100;
         }
 
         private void Rendering()
