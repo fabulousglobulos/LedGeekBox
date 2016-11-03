@@ -71,6 +71,7 @@
     <Compile Include="Model\Definition.cs" />
     <Compile Include="Model\ModelHelper.cs" />
     <Compile Include="Model\Scenario\EmptyScenario.cs" />
+    <Compile Include="Model\Scenario\FillingScenario.cs" />
     <Compile Include="Model\Scenario\ScenariosFactory.cs" />
     <Compile Include="Model\Scenario\TextScenario.cs" />
     <Compile Include="Model\Scenario\HourScenario.cs" />

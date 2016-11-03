@@ -19,7 +19,7 @@ namespace LedGeekBox.Model.Scenario
             {
                 IScenario sco = null;
 
-                string name = s.Substring(0,s.IndexOf("("));
+                string name = s.Substring(0, s.IndexOf("("));
                 switch (name.ToUpper())
                 {
                     case "HOUR":
@@ -27,26 +27,31 @@ namespace LedGeekBox.Model.Scenario
                             sco = new HourScenario();
                             break;
                         }
-                        case "CLEAR":
+                    case "CLEAR":
                         {
                             sco = new EmptyScenario();
 
                             break;
                         }
                     case "TEXT":
-                    {
-                              int first = s.IndexOf("(");
-                            string argumentsRaw = s.Substring(first + 1,   s.Length- first-2);
-                            var argumentsList = argumentsRaw.Split(new string[] {";"},StringSplitOptions.RemoveEmptyEntries);
+                        {
+                            int first = s.IndexOf("(");
+                            string argumentsRaw = s.Substring(first + 1, s.Length - first - 2);
+                            var argumentsList = argumentsRaw.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
                             Dictionary<string, string> arguments = new Dictionary<string, string>();
                             foreach (string argumentsListItem in argumentsList)
                             {
                                 string argName = argumentsListItem.Substring(0, argumentsListItem.IndexOf("=")).ToUpper();
-                                string argvalue = argumentsListItem.Substring(argumentsListItem.IndexOf("=")+1  );
-                                arguments.Add (argName, argvalue  );
+                                string argvalue = argumentsListItem.Substring(argumentsListItem.IndexOf("=") + 1);
+                                arguments.Add(argName, argvalue);
                             }
                             sco = new TextScenario(arguments["MSG1"], arguments["MSG2"]);
 
+                            break;
+                        }
+                    case "FILLING":
+                        {
+                            sco = new FillingScenario();
                             break;
                         }
                 }

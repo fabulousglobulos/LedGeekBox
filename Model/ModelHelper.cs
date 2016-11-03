@@ -101,15 +101,6 @@ namespace LedGeekBox.Model
             string line7 = "";
             string line8 = "";
 
-            //string line21 = "";
-            //string line22 = "";
-            //string line23 = "";
-            //string line24 = "";
-            //string line25 = "";
-            //string line26 = "";
-            //string line27 = "";
-            //string line28 = "";
-
             foreach (bool[,] c in msg)
             {
                 for (int i = 0; i < c.GetLength(1); i++)
@@ -123,15 +114,7 @@ namespace LedGeekBox.Model
                     line7 += c[6, i] ? "#" : "_";
                     line8 += c[7, i] ? "#" : "_";
 
-                    //line21 += c[8, i] ? "#" : "_";
-                    //line22 += c[9, i] ? "#" : "_";
-                    //line23 += c[10, i] ? "#" : "_";
-                    //line24 += c[11, i] ? "#" : "_";
-                    //line25 += c[12, i] ? "#" : "_";
-                    //line26 += c[13, i] ? "#" : "_";
-                    //line27 += c[14, i] ? "#" : "_";
-                    //line28 += c[15, i] ? "#" : "_";
-                }
+                   }
                 line1 += " ";
                 line2 += " ";
                 line3 += " ";
@@ -141,14 +124,6 @@ namespace LedGeekBox.Model
                 line7 += " ";
                 line8 += " ";
 
-                //line21 += " ";
-                //line22 += " ";
-                //line23 += " ";
-                //line24 += " ";
-                //line25 += " ";
-                //line26 += " ";
-                //line27 += " ";
-                //line28 += " ";
             }
 
             Trace.Write(line1 + Environment.NewLine);
@@ -285,11 +260,6 @@ namespace LedGeekBox.Model
             }
 
             int max = (offsetstatic1 > offsetstatic2) ? offsetstatic1 : offsetstatic2;
-
-
-
-            //  Thread.Sleep(period * 2);
-
 
             for (int o1 = 0; o1 <= max; o1++)
             {
