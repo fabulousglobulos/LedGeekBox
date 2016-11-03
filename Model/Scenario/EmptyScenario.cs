@@ -15,7 +15,11 @@ namespace LedGeekBox.Model.Scenario
         public int Start(List<IStep> steps)
         {
             _steps = steps;
-            var emptys = new List<bool[,]> {Definition.Empty, Definition.Empty, Definition.Empty, Definition.Empty, Definition.Empty };
+            var emptys = new List<bool[,]>
+            {
+                Definition.Empty, Definition.Empty, Definition.Empty, Definition.Empty, Definition.Empty,
+                Definition.Empty, Definition.Empty, Definition.Empty, Definition.Empty, Definition.Empty
+            };
 
             foreach (IStep step in steps)
             {

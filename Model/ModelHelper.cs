@@ -12,7 +12,6 @@ namespace LedGeekBox.Model
     {
         public readonly static int period = 100;
 
-
         public static void log(bool[,] msg)
         {
             string line1 = "";
@@ -91,7 +90,6 @@ namespace LedGeekBox.Model
             Trace.Write(line16 + Environment.NewLine);
         }
 
-
         public static void log(List<bool[,]> msg)
         {
             string line1 = "";
@@ -103,14 +101,14 @@ namespace LedGeekBox.Model
             string line7 = "";
             string line8 = "";
 
-            string line21 = "";
-            string line22 = "";
-            string line23 = "";
-            string line24 = "";
-            string line25 = "";
-            string line26 = "";
-            string line27 = "";
-            string line28 = "";
+            //string line21 = "";
+            //string line22 = "";
+            //string line23 = "";
+            //string line24 = "";
+            //string line25 = "";
+            //string line26 = "";
+            //string line27 = "";
+            //string line28 = "";
 
             foreach (bool[,] c in msg)
             {
@@ -125,14 +123,14 @@ namespace LedGeekBox.Model
                     line7 += c[6, i] ? "#" : "_";
                     line8 += c[7, i] ? "#" : "_";
 
-                    line21 += c[8, i] ? "#" : "_";
-                    line22 += c[9, i] ? "#" : "_";
-                    line23 += c[10, i] ? "#" : "_";
-                    line24 += c[11, i] ? "#" : "_";
-                    line25 += c[12, i] ? "#" : "_";
-                    line26 += c[13, i] ? "#" : "_";
-                    line27 += c[14, i] ? "#" : "_";
-                    line28 += c[15, i] ? "#" : "_";
+                    //line21 += c[8, i] ? "#" : "_";
+                    //line22 += c[9, i] ? "#" : "_";
+                    //line23 += c[10, i] ? "#" : "_";
+                    //line24 += c[11, i] ? "#" : "_";
+                    //line25 += c[12, i] ? "#" : "_";
+                    //line26 += c[13, i] ? "#" : "_";
+                    //line27 += c[14, i] ? "#" : "_";
+                    //line28 += c[15, i] ? "#" : "_";
                 }
                 line1 += " ";
                 line2 += " ";
@@ -143,14 +141,14 @@ namespace LedGeekBox.Model
                 line7 += " ";
                 line8 += " ";
 
-                line21 += " ";
-                line22 += " ";
-                line23 += " ";
-                line24 += " ";
-                line25 += " ";
-                line26 += " ";
-                line27 += " ";
-                line28 += " ";
+                //line21 += " ";
+                //line22 += " ";
+                //line23 += " ";
+                //line24 += " ";
+                //line25 += " ";
+                //line26 += " ";
+                //line27 += " ";
+                //line28 += " ";
             }
 
             Trace.Write(line1 + Environment.NewLine);
@@ -162,16 +160,15 @@ namespace LedGeekBox.Model
             Trace.Write(line7 + Environment.NewLine);
             Trace.Write(line8 + Environment.NewLine);
 
-            Trace.Write(line21 + Environment.NewLine);
-            Trace.Write(line22 + Environment.NewLine);
-            Trace.Write(line23 + Environment.NewLine);
-            Trace.Write(line24 + Environment.NewLine);
-            Trace.Write(line25 + Environment.NewLine);
-            Trace.Write(line26 + Environment.NewLine);
-            Trace.Write(line27 + Environment.NewLine);
-            Trace.Write(line28 + Environment.NewLine);
+            //Trace.Write(line21 + Environment.NewLine);
+            //Trace.Write(line22 + Environment.NewLine);
+            //Trace.Write(line23 + Environment.NewLine);
+            //Trace.Write(line24 + Environment.NewLine);
+            //Trace.Write(line25 + Environment.NewLine);
+            //Trace.Write(line26 + Environment.NewLine);
+            //Trace.Write(line27 + Environment.NewLine);
+            //Trace.Write(line28 + Environment.NewLine);
         }
-
 
         public static void RenderingGeneric(object param)
         {
@@ -199,10 +196,10 @@ namespace LedGeekBox.Model
                 return y;
             }).ToList();
 
-            //log(msg);
+            log(msg1);
+            log(msg2);
 
             bool[,] mainmessage1 = new bool[8, totallenght1];
-
             bool[,] mainmessage2 = new bool[8, totallenght2];
 
             int localcursor = 0;
@@ -251,13 +248,27 @@ namespace LedGeekBox.Model
                 }
                 if (final1 > 0)
                 {
-                    var vincent = Merge(new bool[8, final1], mainmessage1);
-
-                    mainmessage1 = vincent;
-
+                    mainmessage1 = Merge(new bool[8, final1], mainmessage1);
                     totallenght1 = totallenght1 + final1;
                 }
 
+            }
+
+
+            if (totallenght2 < 40)
+            {//center the message
+                double reste2 = (40 - totallenght2) / 2.0;
+                int final2 = Convert.ToInt32(reste2);
+                double division2 = reste2 - final2;
+                if (division2 >= 0.5)
+                {
+                    final2++;
+                }
+                if (final2 > 0)
+                {
+                    mainmessage2 = Merge(new bool[8, final2], mainmessage2);
+                    totallenght2 = totallenght2 + final2;
+                }
             }
 
             int offsetstatic1 = totallenght1 - 5 * 8;
@@ -266,12 +277,27 @@ namespace LedGeekBox.Model
                 offsetstatic1 = 0;
             }
 
-            //  Thread.Sleep(period * 2);
-            List<bool[,]> dico = new List<bool[,]>();
 
-            for (int o1 = 0; o1 <= offsetstatic1; o1++)
+            int offsetstatic2 = totallenght2 - 5 * 8;
+            if (offsetstatic2 < 0)
             {
+                offsetstatic2 = 0;
+            }
+
+            int max = (offsetstatic1 > offsetstatic2) ? offsetstatic1 : offsetstatic2;
+
+
+
+            //  Thread.Sleep(period * 2);
+
+
+            for (int o1 = 0; o1 <= max; o1++)
+            {
+                List<bool[,]> dico = new List<bool[,]>();
+
+
                 List<bool[,]> z = new List<bool[,]>();
+                #region 1
 
                 int index = 0;
                 int smallindex = 0;
@@ -294,15 +320,30 @@ namespace LedGeekBox.Model
                     }
                     if (i < totallenght1)
                     {
-                        current[0, smallindex] = mainmessage1[0, index];
-                        current[1, smallindex] = mainmessage1[1, index];
-                        current[2, smallindex] = mainmessage1[2, index];
-                        current[3, smallindex] = mainmessage1[3, index];
+                        if (index < mainmessage1.GetLength(1))
+                        {
+                            current[0, smallindex] = mainmessage1[0, index];
+                            current[1, smallindex] = mainmessage1[1, index];
+                            current[2, smallindex] = mainmessage1[2, index];
+                            current[3, smallindex] = mainmessage1[3, index];
 
-                        current[4, smallindex] = mainmessage1[4, index];
-                        current[5, smallindex] = mainmessage1[5, index];
-                        current[6, smallindex] = mainmessage1[6, index];
-                        current[7, smallindex] = mainmessage1[7, index];
+                            current[4, smallindex] = mainmessage1[4, index];
+                            current[5, smallindex] = mainmessage1[5, index];
+                            current[6, smallindex] = mainmessage1[6, index];
+                            current[7, smallindex] = mainmessage1[7, index];
+                        }
+                        else
+                        {
+                            current[0, smallindex] = false;
+                            current[1, smallindex] = false;
+                            current[2, smallindex] = false;
+                            current[3, smallindex] = false;
+
+                            current[4, smallindex] = false;
+                            current[5, smallindex] = false;
+                            current[6, smallindex] = false;
+                            current[7, smallindex] = false;
+                        }
                     }
 
                     smallindex++;
@@ -322,46 +363,18 @@ namespace LedGeekBox.Model
                 dico.Add(z.Count > 2 ? z[2] : Helper.EmptyMatrix);
                 dico.Add(z.Count > 3 ? z[3] : Helper.EmptyMatrix);
                 dico.Add(z.Count > 4 ? z[4] : Helper.EmptyMatrix);
-            }
 
-            if (totallenght2 < 40)
-            {
-                //center the message
-                double reste2 = (40 - totallenght2) / 2.0;
-                int final2 = Convert.ToInt32(reste2);
-                double division2 = reste2 - final2;
-                if (division2 >= 0.5)
-                {
-                    final2++;
-                }
-                if (final2 > 0)
-                {
-                    var vincent = Merge(new bool[8, final2], mainmessage2);
+                #endregion 1
 
-                    mainmessage2 = vincent;
+                #region 2
 
-                    totallenght1 = totallenght2 + final2;
-                }
-
-            }
-
-            int offsetstatic2 = totallenght2 - 5 * 8;
-            if (offsetstatic2 < 0)
-            {
-                offsetstatic2 = 0;
-            }
-
-            //Thread.Sleep(period * 2);
-
-            for (int o2 = 0; o2 <= offsetstatic1; o2++)
-            {
                 List<bool[,]> z2 = new List<bool[,]>();
 
                 int index2 = 0;
                 int smallindex2 = 0;
                 bool[,] current2 = new bool[8, 8];
 
-                for (int i2 = (0 + o2); i2 < (5 * 8 + o2); i2++)
+                for (int i2 = (0 + o1); i2 < (5 * 8 + o1); i2++)
                 {
                     index2 = i2;
 
@@ -378,20 +391,35 @@ namespace LedGeekBox.Model
                     }
                     if (i2 < totallenght2)
                     {
-                        current2[0, smallindex2] = mainmessage2[0, index2];
-                        current2[1, smallindex2] = mainmessage2[1, index2];
-                        current2[2, smallindex2] = mainmessage2[2, index2];
-                        current2[3, smallindex2] = mainmessage2[3, index2];
+                        if (index2 < mainmessage2.GetLength(1))
+                        {
+                            current2[0, smallindex2] = mainmessage2[0, index2];
+                            current2[1, smallindex2] = mainmessage2[1, index2];
+                            current2[2, smallindex2] = mainmessage2[2, index2];
+                            current2[3, smallindex2] = mainmessage2[3, index2];
 
-                        current2[4, smallindex2] = mainmessage2[4, index2];
-                        current2[5, smallindex2] = mainmessage2[5, index2];
-                        current2[6, smallindex2] = mainmessage2[6, index2];
-                        current2[7, smallindex2] = mainmessage2[7, index2];
+                            current2[4, smallindex2] = mainmessage2[4, index2];
+                            current2[5, smallindex2] = mainmessage2[5, index2];
+                            current2[6, smallindex2] = mainmessage2[6, index2];
+                            current2[7, smallindex2] = mainmessage2[7, index2];
+                        }
+                        else
+                        {
+                            current2[0, smallindex2] = false;
+                            current2[1, smallindex2] = false;
+                            current2[2, smallindex2] = false;
+                            current2[3, smallindex2] = false;
+                                              
+                            current2[4, smallindex2] = false;
+                            current2[5, smallindex2] = false;
+                            current2[6, smallindex2] = false;
+                            current2[7, smallindex2] = false;
+                        }
                     }
 
                     smallindex2++;
 
-                    if ((index2 == ((5 * 8) - 1) + o2) && (smallindex2 != 1))
+                    if ((index2 == ((5 * 8) - 1) + o1) && (smallindex2 != 1))
                     {
                         z2.Add(current2);
                     }
@@ -407,11 +435,87 @@ namespace LedGeekBox.Model
                 dico.Add(z2.Count > 3 ? z2[3] : Helper.EmptyMatrix);
                 dico.Add(z2.Count > 4 ? z2[4] : Helper.EmptyMatrix);
 
-                stp.ForEach(s => s.Apply(dico));
+                #endregion 2
 
+                stp.ForEach(s => s.Apply(dico));
+                Thread.Sleep(period);
             }
+
+
             Thread.Sleep(period * 2);
+
+
         }
+
+
+        ////////////////////////////////////////
+
+
+
+
+
+
+        //    //Thread.Sleep(period * 2);
+
+        //    for (int o2 = 0; o2 <= offsetstatic1; o2++)
+        //    {
+        //        List<bool[,]> z2 = new List<bool[,]>();
+
+        //        int index2 = 0;
+        //        int smallindex2 = 0;
+        //        bool[,] current2 = new bool[8, 8];
+
+        //        for (int i2 = (0 + o2); i2 < (5 * 8 + o2); i2++)
+        //        {
+        //            index2 = i2;
+
+        //            if (index2 > totallenght2 + 1) //on a depasser la taille total du message le message !
+        //            {
+        //                break;
+        //            }
+
+        //            if (smallindex2 > 7) //on cherche a remplir uniquement une matrix, sinon on passe au suivant
+        //            {
+        //                z2.Add(current2);
+        //                current2 = new bool[8, 8];
+        //                smallindex2 = 0;
+        //            }
+        //            if (i2 < totallenght2)
+        //            {
+        //                current2[0, smallindex2] = mainmessage2[0, index2];
+        //                current2[1, smallindex2] = mainmessage2[1, index2];
+        //                current2[2, smallindex2] = mainmessage2[2, index2];
+        //                current2[3, smallindex2] = mainmessage2[3, index2];
+
+        //                current2[4, smallindex2] = mainmessage2[4, index2];
+        //                current2[5, smallindex2] = mainmessage2[5, index2];
+        //                current2[6, smallindex2] = mainmessage2[6, index2];
+        //                current2[7, smallindex2] = mainmessage2[7, index2];
+        //            }
+
+        //            smallindex2++;
+
+        //            if ((index2 == ((5 * 8) - 1) + o2) && (smallindex2 != 1))
+        //            {
+        //                z2.Add(current2);
+        //            }
+        //        }
+        //        if (z2.Count == 4)
+        //        {
+        //            z2.Add(current2);
+        //        }
+
+        //        dico.Add(z2.Count > 0 ? z2[0] : Helper.EmptyMatrix);
+        //        dico.Add(z2.Count > 1 ? z2[1] : Helper.EmptyMatrix);
+        //        dico.Add(z2.Count > 2 ? z2[2] : Helper.EmptyMatrix);
+        //        dico.Add(z2.Count > 3 ? z2[3] : Helper.EmptyMatrix);
+        //        dico.Add(z2.Count > 4 ? z2[4] : Helper.EmptyMatrix);
+
+        //        stp.ForEach(s => s.Apply(dico));
+
+        //    }
+        //    Thread.Sleep(period * 2);
+        //}
 
 
         static bool[,] Merge(bool[,] original, bool[,] added)
@@ -433,12 +537,9 @@ namespace LedGeekBox.Model
                 final[5, i + originalY] = added[5, i];
                 final[6, i + originalY] = added[6, i];
                 final[7, i + originalY] = added[7, i];
-
             }
 
-
             return final;
-
         }
 
 
