@@ -143,7 +143,7 @@ namespace LedGeekBox.ViewModel
 
         public ViewModelMain(ViewModelMaxLayout vm)
         {
-            steps = new List<IStep> {vm, arduino };
+            steps = new List<IStep> { vm, arduino };
             //vmLayout = vm;
             //arduino = arduinoController;
             XDisplayCommand = new RelayCommand(o => XDisplayClick());
@@ -174,13 +174,13 @@ namespace LedGeekBox.ViewModel
             OpenFileDialog f = new OpenFileDialog();
             var result = f.ShowDialog();
             string fullpath = @"e:\g.png";
-            if (result ==false)
+            if (result == false)
             {
                 return;
             }
             fullpath = f.FileName;
 
-           
+
             var original = Image.FromFile(fullpath);
             original = ResizePicture(original, 40, 16);
             Bitmap bmp = new Bitmap(original);
@@ -203,7 +203,7 @@ namespace LedGeekBox.ViewModel
             ModelHelper.log(datas);
 
             var line1 = ConverToList(datas);
-            steps.ForEach(x=>x.Apply(line1));
+            steps.ForEach(x => x.Apply(line1));
             ModelHelper.log(line1);
 
             //var line2 = ConverToList(datas, false);
@@ -213,36 +213,36 @@ namespace LedGeekBox.ViewModel
 
         List<bool[,]> ConverToList(bool[,] datas)
         {
-           // int inf = firstline ? 0 : 8;
+            // int inf = firstline ? 0 : 8;
 
             List<bool[,]> l = new List<bool[,]>();
 
             for (int i = 0; i < 5; i++)
             {
-                {
                     bool[,] x = new bool[8, 8];
                     for (int j = 0; j < 8; j++)
                     {
                         for (int k = 0; k < 8; k++)
                         {
-                            x[k, j] = datas[i*8 + j, k]; //TODO verifier // int inf = firstline ? 0 : 8;
+                            x[k, j] = datas[i * 8 + j, k]; //TODO verifier // int inf = firstline ? 0 : 8;
                         }
                     }
                     l.Add(x);
-                }
-
-                {
-                    bool[,] x2 = new bool[8, 8];
-                    for (int j = 0; j < 8; j++)
-                    {
-                        for (int k = 0; k < 8; k++)
-                        {
-                            x2[k, j] = datas[i*8 + j, 8 + k]; //TODO verifier // int inf = firstline ? 0 : 8;
-                        }
-                    }
-                    l.Add(x2);
-                }
             }
+
+            for (int i = 0; i < 5; i++)
+            {
+                bool[,] x2 = new bool[8, 8];
+                for (int j = 0; j < 8; j++)
+                {
+                    for (int k = 0; k < 8; k++)
+                    {
+                        x2[k, j] = datas[i * 8 + j, 8 + k]; //TODO verifier // int inf = firstline ? 0 : 8;
+                    }
+                }
+                l.Add(x2);
+            }
+
             return l;
         }
 
@@ -297,7 +297,7 @@ namespace LedGeekBox.ViewModel
             string hour = DateTime.Now.ToString("hh:mm:ss");
             string date = DateTime.Now.ToString("dd.MM.yy");
 
-            ModelHelper.RenderingGeneric(new ThreadObject { WhatToWrite1 = hour, WhatToWrite2 = date, Steps = steps,  });
+            ModelHelper.RenderingGeneric(new ThreadObject { WhatToWrite1 = hour, WhatToWrite2 = date, Steps = steps, });
         }
 
 
@@ -316,7 +316,7 @@ namespace LedGeekBox.ViewModel
             dico1.Add(x ? Definition.neuf : Definition.croix);
             dico1.Add(x ? Definition.zero : Definition.croix);
 
-            steps.ForEach(x=> x.Apply(dico1));
+            steps.ForEach(x => x.Apply(dico1));
 
             x = !x;
         }
@@ -325,7 +325,7 @@ namespace LedGeekBox.ViewModel
         private void DisplayCustomTextClick()
         {
             Thread t1 = new Thread(ModelHelper.RenderingGeneric);
-            t1.Start(new ThreadObject { WhatToWrite1 = Line1, WhatToWrite2 = Line2 ,Steps = steps,  Reverse = Reverse1 });
+            t1.Start(new ThreadObject { WhatToWrite1 = Line1, WhatToWrite2 = Line2, Steps = steps, Reverse = Reverse1 });
         }
 
     }
