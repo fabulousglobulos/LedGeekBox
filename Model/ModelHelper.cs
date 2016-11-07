@@ -152,24 +152,79 @@ namespace LedGeekBox.Model
             Rendering(typedParam.WhatToWrite1, typedParam.WhatToWrite2, typedParam.Steps);
         }
 
-        //TODO use : whitetowrite2
-        static void Rendering(string whatToWrite1, string whatToWrite2, List<IStep> stp)
+
+
+        public static void Build(string whatToWrite1, string whatToWrite2, out List<bool[,]> msg1, out List<bool[,]> msg2,out int max, out int totallenght1 , out int totallenght2)
         {
-            int totallenght1 = 0;
-            List<bool[,]> msg1 = whatToWrite1.ToList().Select(x =>
+             totallenght1 = 0;
+
+            msg1 = new List<bool[,]>();
+            foreach (char x in whatToWrite1)
             {
                 var y = Helper.Get(x.ToString());
                 totallenght1 += y.GetLength(1);
-                return y;
-            }).ToList();
+                msg1.Add(y);
+            }
+           //msg1 = whatToWrite1.ToList().Select(x =>
+           // {
+           //     var y = Helper.Get(x.ToString());
+           //     totallenght1 += y.GetLength(1);
+           //     return y;
+           // }).ToList();
 
-            int totallenght2 = 0;
-            List<bool[,]> msg2 = whatToWrite2.ToList().Select(x =>
+             totallenght2 = 0;
+
+            msg2 = new List<bool[,]>();
+            foreach (char x in whatToWrite2)
             {
                 var y = Helper.Get(x.ToString());
                 totallenght2 += y.GetLength(1);
-                return y;
-            }).ToList();
+                msg2.Add(y);
+            }
+            if (totallenght1 > totallenght2)
+            {
+                max = totallenght1;
+            }
+            else
+            {
+                max = totallenght2;
+            }
+
+            //List<bool[,]> msg2 = whatToWrite2.ToList().Select(x =>
+            //{
+            //    var y = Helper.Get(x.ToString());
+            //    totallenght2 += y.GetLength(1);
+            //    return y;
+            //}).ToList();
+        }
+
+        //TODO use : whitetowrite2
+        static void Rendering(string whatToWrite1, string whatToWrite2, List<IStep> stp)
+        {
+            //int totallenght1 = 0;
+            //List<bool[,]> msg1 = whatToWrite1.ToList().Select(x =>
+            //{
+            //    var y = Helper.Get(x.ToString());
+            //    totallenght1 += y.GetLength(1);
+            //    return y;
+            //}).ToList();
+
+            //int totallenght2 = 0;
+            //List<bool[,]> msg2 = whatToWrite2.ToList().Select(x =>
+            //{
+            //    var y = Helper.Get(x.ToString());
+            //    totallenght2 += y.GetLength(1);
+            //    return y;
+            //}).ToList();
+
+            int totallenght1 = 0;
+            int totallenght2 = 0;
+            List<bool[,]> msg1 = null;
+            List<bool[,]> msg2 = null;
+
+            int tmpmax = 0;
+            Build(whatToWrite1, whatToWrite2, out msg1, out msg2, out tmpmax,out totallenght1, out totallenght2 );
+
 
             log(msg1);
             log(msg2);
@@ -273,7 +328,9 @@ namespace LedGeekBox.Model
                 int smallindex = 0;
                 bool[,] current = new bool[8, 8];
 
-                for (int i = (0 + o1); i < (5 * 8 + o1); i++)
+                bool touched = false;
+
+                for (int i =  o1; i < (5 * 8 + o1); i++)
                 {
                     index = i;
 
@@ -315,15 +372,17 @@ namespace LedGeekBox.Model
                             current[7, smallindex] = false;
                         }
                     }
-
+                    touched = true;
                     smallindex++;
 
                     if ((index == ((5 * 8) - 1) + o1) && (smallindex != 1))
                     {
                         z.Add(current);
+                        touched = false;
                     }
                 }
-                if (z.Count == 4)
+              //  if (z.Count == 4)
+                if(touched)
                 {
                     z.Add(current);
                 }
@@ -343,6 +402,8 @@ namespace LedGeekBox.Model
                 int index2 = 0;
                 int smallindex2 = 0;
                 bool[,] current2 = new bool[8, 8];
+
+                bool touched2 = false;
 
                 for (int i2 = (0 + o1); i2 < (5 * 8 + o1); i2++)
                 {
@@ -388,13 +449,14 @@ namespace LedGeekBox.Model
                     }
 
                     smallindex2++;
-
+                    touched2 = true;
                     if ((index2 == ((5 * 8) - 1) + o1) && (smallindex2 != 1))
                     {
                         z2.Add(current2);
+                        touched2 = false;
                     }
                 }
-                if (z2.Count == 4)
+               if(touched2)// if (z2.Count == 4)
                 {
                     z2.Add(current2);
                 }

@@ -22,7 +22,6 @@ namespace LedGeekBox.Model.Scenario
         List<IStep> _steps;
 
         Thread t1 = null;
-        Thread t2 = null;
 
         public int Start(List<IStep> steps)
         {
@@ -33,7 +32,15 @@ namespace LedGeekBox.Model.Scenario
             //t2 = new Thread(ModelHelper.RenderingGeneric);
             //t2.Start(new ThreadObject { WhatToWrite = msg2, Steps = _steps, FirstLine = false });
 
-            return ModelHelper.period* 100;
+            int totallenght1 = 0;
+            int totallenght2 = 0;
+            List<bool[,]> msg1List = null;
+            List<bool[,]> msg2List = null;
+
+            int tmpmax = 0;
+            ModelHelper.Build(msg1, msg2, out msg1List, out msg2List, out totallenght1, out totallenght2, out tmpmax);
+
+            return ModelHelper.period* (tmpmax);
         }
 
 
@@ -44,11 +51,6 @@ namespace LedGeekBox.Model.Scenario
                 t1.Abort();
             }
             t1 = null;
-            if (t2 != null && t2.IsAlive)
-            {
-                t2.Abort();
-            }
-            t2 = null;
         }
     }
 }

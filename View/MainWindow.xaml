@@ -54,7 +54,7 @@
         <!-- scenarios -->
         <Button Command="{Binding Path=ScenarioCommand}" Grid.Row="3" Grid.Column="0" Height="20"  Content="Scenario" HorizontalAlignment="Center"></Button>
 
-        <TextBox  x:Name="ScenariosList"  Grid.Row="3" Grid.Column="1"  Text="{Binding Path=Scenarios}"  />
+        <TextBox  x:Name="ScenariosList"  Grid.Row="3" Grid.Column="1"  Text="{Binding Path=Scenarios}"  TextWrapping="Wrap"  AcceptsReturn="True"/>
 
     </Grid>
 </Window>
