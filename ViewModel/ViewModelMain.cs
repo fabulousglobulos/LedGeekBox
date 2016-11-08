@@ -295,7 +295,7 @@ namespace LedGeekBox.ViewModel
 
         private void DisplayHourClick()
         {
-            string hour = DateTime.Now.ToString("hh:mm:ss");
+            string hour = DateTime.Now.ToString("HH:mm:ss");
             string date = DateTime.Now.ToString("dd.MM.yy");
 
             ModelHelper.RenderingGeneric(new ThreadObject { WhatToWrite1 = hour, WhatToWrite2 = date, Steps = steps, });
