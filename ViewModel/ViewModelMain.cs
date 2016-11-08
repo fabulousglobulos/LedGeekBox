@@ -160,11 +160,13 @@ namespace LedGeekBox.ViewModel
             var a = Helper.Get("a");//force to load setup
 
             Scenarios = "HOUR()" + Environment.NewLine;
+            Scenarios += "SNOW()" + Environment.NewLine;
             Scenarios += "TEXT(msg1=#coucou c'est nous!;msg2=C0mment c@ v@ ? )" + Environment.NewLine;
             Scenarios += "HOUR()" + Environment.NewLine;
             Scenarios += "TEXT(msg1=prout;msg2=123456789 ? )" + Environment.NewLine;
             Scenarios += "FILLING()" + Environment.NewLine;
             Scenarios += "CLEAR()" + Environment.NewLine;
+            
         }
 
         bool x = true;
@@ -212,7 +214,7 @@ namespace LedGeekBox.ViewModel
             //ModelHelper.log(line2);
         }
 
-        List<bool[,]> ConverToList(bool[,] datas)
+       public static List<bool[,]> ConverToList(bool[,] datas)
         {
             // int inf = firstline ? 0 : 8;
 

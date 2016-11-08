@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -73,6 +74,7 @@
     <Compile Include="Model\Scenario\EmptyScenario.cs" />
     <Compile Include="Model\Scenario\FillingScenario.cs" />
     <Compile Include="Model\Scenario\ScenariosFactory.cs" />
+    <Compile Include="Model\Scenario\SnowScenario.cs" />
     <Compile Include="Model\Scenario\TextScenario.cs" />
     <Compile Include="Model\Scenario\HourScenario.cs" />
     <Compile Include="Model\Scenario\IScenario.cs" />

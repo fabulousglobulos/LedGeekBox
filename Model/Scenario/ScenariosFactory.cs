@@ -33,6 +33,12 @@ namespace LedGeekBox.Model.Scenario
 
                             break;
                         }
+                    case "SNOW":
+                        {
+                            sco = new SnowScenario();
+
+                            break;
+                        }
                     case "TEXT":
                         {
                             int first = s.IndexOf("(");
