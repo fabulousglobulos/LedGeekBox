@@ -162,6 +162,7 @@ namespace LedGeekBox.ViewModel
             Scenarios = "HOUR()" + Environment.NewLine;
             Scenarios += "SNOW()" + Environment.NewLine;
             Scenarios += "TEXT(msg1=#coucou c'est nous!;msg2=C0mment c@ v@ ? )" + Environment.NewLine;
+            Scenarios += "PIXEL()" + Environment.NewLine;
             Scenarios += "HOUR()" + Environment.NewLine;
             Scenarios += "TEXT(msg1=prout;msg2=123456789 ? )" + Environment.NewLine;
             Scenarios += "FILLING()" + Environment.NewLine;

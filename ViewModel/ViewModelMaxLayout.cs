@@ -9,7 +9,7 @@ using LedGeekBox.Model.Scenario;
 
 namespace LedGeekBox.ViewModel
 {
-    public class ViewModelMaxLayout : INotifyPropertyChanged , IStep
+    public class ViewModelMaxLayout : INotifyPropertyChanged, IStep
     {
         ViewModelMax7219 vm1 = null;
         ViewModelMax7219 vm2 = null;
@@ -21,7 +21,7 @@ namespace LedGeekBox.ViewModel
         ViewModelMax7219 vm8 = null;
         ViewModelMax7219 vm9 = null;
         ViewModelMax7219 vm10 = null;
-        
+
         private static Color Black = Color.FromRgb(0, 0, 0);
         private static Color Red = Color.FromRgb(255, 0, 0);
 
@@ -68,31 +68,6 @@ namespace LedGeekBox.ViewModel
             vm10.Apply(datas[9]);
             vm10.Apply(datas[9]);
         }
-
-        
-        //private void Apply1(List< bool[,]> datas)
-        //{
-        //    CheckConstraint(datas);
-
-        //    vm1.Apply(datas[0]);
-        //    vm2.Apply(datas[1]);
-        //    vm3.Apply(datas[2]);
-
-        //    vm4.Apply(datas[3]);
-        //    vm5.Apply(datas[4]);
-        //}
-
-        //private void Apply2(List<  bool[,]> datas)
-        //{
-        //    CheckConstraint(datas);
-
-        //    vm6.Apply(datas[0]);
-        //    vm7.Apply(datas[1]);
-        //    vm8.Apply(datas[2]);
-
-        //    vm9.Apply(datas[3]);
-        //    vm10.Apply(datas[4]);
-        //}
 
         private void CheckConstraint(List<bool[,]> datas)
         {

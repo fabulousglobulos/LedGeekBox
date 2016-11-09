@@ -39,6 +39,12 @@ namespace LedGeekBox.Model.Scenario
 
                             break;
                         }
+                    case "PIXEL":
+                        {
+                            sco = new PixelScenario();
+
+                            break;
+                        }
                     case "TEXT":
                         {
                             int first = s.IndexOf("(");
