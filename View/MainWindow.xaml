@@ -56,5 +56,8 @@
 
         <TextBox  x:Name="ScenariosList"  Grid.Row="3" Grid.Column="1"  Text="{Binding Path=Scenarios}"  TextWrapping="Wrap"  AcceptsReturn="True"/>
 
+
+        <Button Command="{Binding Path=DesignModeCommand}" Grid.Row="3" Grid.Column="2" Height="20"  Content="Design Mode" HorizontalAlignment="Center"></Button>
+
     </Grid>
 </Window>

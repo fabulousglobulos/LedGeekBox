@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -104,6 +105,7 @@ namespace LedGeekBox.ViewModel
         public ICommand DisplayHourCommand { get; set; }
         public ICommand ScenarioCommand { get; set; }
         public ICommand ImportCommand { get; set; }
+        public ICommand DesignModeCommand { get; set; }
 
         private bool _isChecked1;
 
@@ -151,7 +153,7 @@ namespace LedGeekBox.ViewModel
             DisplayHourCommand = new RelayCommand(o => DisplayHourClick());
             ScenarioCommand = new RelayCommand(o => ScenarioClick());
             ImportCommand = new RelayCommand(o => ImportClick());
-
+            DesignModeCommand = new RelayCommand(o => DesignModeClick());
 
             Line1 = "Hello World ! 123456";
             Line2 = "@coucou #ABC";
@@ -211,11 +213,22 @@ namespace LedGeekBox.ViewModel
             ModelHelper.log(line1);
 
             //var line2 = ConverToList(datas, false);
-            //steps.ForEach(x => x.Apply(line2, false));
+            //steps.ForEach(x => x.Apply(line2, false));ScenarioCommand
             //ModelHelper.log(line2);
         }
 
-       public static List<bool[,]> ConverToList(bool[,] datas)
+
+        public void DesignModeClick()
+        {
+            var vm = steps[0] as ViewModelMaxLayout;
+            if (vm != null)
+            {
+                var result = vm.ReadScreen();
+                steps[1].Apply(result);
+            }
+        }
+
+        public static List<bool[,]> ConverToList(bool[,] datas)
         {
             // int inf = firstline ? 0 : 8;
 

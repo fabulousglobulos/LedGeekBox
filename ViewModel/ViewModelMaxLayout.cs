@@ -66,7 +66,7 @@ namespace LedGeekBox.ViewModel
             vm8.Apply(datas[7]);
             vm9.Apply(datas[8]);
             vm10.Apply(datas[9]);
-            vm10.Apply(datas[9]);
+            //   vm10.Apply(datas[9]);
         }
 
         private void CheckConstraint(List<bool[,]> datas)
@@ -75,6 +75,27 @@ namespace LedGeekBox.ViewModel
             {
                 throw new ArgumentException("not enough data in input");
             }
+        }
+
+
+
+        public List<bool[,]> ReadScreen()
+        {
+            List<bool[,]> datas = new List<bool[,]>();
+
+            datas.Add(vm1.Read());
+            datas.Add(vm2.Read());
+            datas.Add(vm3.Read());
+            datas.Add(vm4.Read());
+            datas.Add(vm5.Read());
+
+            datas.Add(vm6.Read());
+            datas.Add(vm7.Read());
+            datas.Add(vm8.Read());
+            datas.Add(vm9.Read());
+            datas.Add(vm10.Read());
+
+            return datas;
         }
     }
 }

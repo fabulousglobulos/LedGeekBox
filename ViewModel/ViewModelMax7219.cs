@@ -1089,6 +1089,97 @@ namespace LedGeekBox.ViewModel
 
         }
 
+        public bool[,] Read()
+        {
+            bool[,] data = new bool[8, 8];
+
+            {
+                data[0, 0] = a1_fill == Red;
+                data[0, 1] = a2_fill == Red;
+                data[0, 2] = a3_fill == Red;
+                data[0, 3] = a4_fill == Red;
+                data[0, 4] = a5_fill == Red;
+                data[0, 5] = a6_fill == Red;
+                data[0, 6] = a7_fill == Red;
+                data[0, 7] = a8_fill == Red;
+            }
+            {
+                data[1, 0] = b1_fill == Red;
+                data[1, 1] = b2_fill == Red;
+                data[1, 2] = b3_fill == Red;
+                data[1, 3] = b4_fill == Red;
+                data[1, 4] = b5_fill == Red;
+                data[1, 5] = b6_fill == Red;
+                data[1, 6] = b7_fill == Red;
+                data[1, 7] = b8_fill == Red;
+            }
+            {
+                data[2, 0] = c1_fill == Red;
+                data[2, 1] = c2_fill == Red;
+                data[2, 2] = c3_fill == Red;
+                data[2, 3] = c4_fill == Red;
+                data[2, 4] = c5_fill == Red;
+                data[2, 5] = c6_fill == Red;
+                data[2, 6] = c7_fill == Red;
+                data[2, 7] = c8_fill == Red;
+            }
+            {
+                data[3, 0] = d1_fill == Red;
+                data[3, 1] = d2_fill == Red;
+                data[3, 2] = d3_fill == Red;
+                data[3, 3] = d4_fill == Red;
+                data[3, 4] = d5_fill == Red;
+                data[3, 5] = d6_fill == Red;
+                data[3, 6] = d7_fill == Red;
+                data[3, 7] = d8_fill == Red;
+            }
+            {
+                data[4, 0] = e1_fill == Red;
+                data[4, 1] = e2_fill == Red;
+                data[4, 2] = e3_fill == Red;
+                data[4, 3] = e4_fill == Red;
+                data[4, 4] = e5_fill == Red;
+                data[4, 5] = e6_fill == Red;
+                data[4, 6] = e7_fill == Red;
+                data[4, 7] = e8_fill == Red;
+            }
+            {
+                data[5, 0] = f1_fill == Red;
+                data[5, 1] = f2_fill == Red;
+                data[5, 2] = f3_fill == Red;
+                data[5, 3] = f4_fill == Red;
+
+                data[5, 4] = f5_fill == Red;
+                data[5, 5] = f6_fill == Red;
+                data[5, 6] = f7_fill == Red;
+                data[5, 7] = f8_fill == Red;
+            }
+            {
+                data[6, 0] = g1_fill == Red;
+                data[6, 1] = g2_fill == Red;
+                data[6, 2] = g3_fill == Red;
+                data[6, 3] = g4_fill == Red;
+                data[6, 4] = g5_fill == Red;
+                data[6, 5] = g6_fill == Red;
+                data[6, 6] = g7_fill == Red;
+                data[6, 7] = g8_fill == Red;
+            }
+            {
+                data[7, 0] = h1_fill == Red;
+                data[7, 1] = h2_fill == Red;
+                data[7, 2] = h3_fill == Red;
+                data[7, 3] = h4_fill == Red;
+
+                data[7, 4] = h5_fill == Red;
+                data[7, 5] = h6_fill == Red;
+                data[7, 6] = h7_fill == Red;
+                data[7, 7] = h8_fill == Red;
+            }
+
+
+            return data;
+
+        }
 
         public void OnMouseClick(string ellipsename)
         {
@@ -1097,11 +1188,11 @@ namespace LedGeekBox.ViewModel
             var result = fieldInfos.FirstOrDefault(f => f.Name == propertyname);
             if (result != null)
             {
-                var colorobj = result.GetValue(this) ;
+                var colorobj = result.GetValue(this);
 
                 if (colorobj is Color)
                 {
-                    Color c = (Color) colorobj;
+                    Color c = (Color)colorobj;
 
                     if (c == Red)
                     {
