@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
@@ -1086,5 +1088,33 @@ namespace LedGeekBox.ViewModel
 
 
         }
+
+
+        public void OnMouseClick(string ellipsename)
+        {
+            string propertyname = ellipsename + "_fill";
+            var fieldInfos = GetType().GetProperties();
+            var result = fieldInfos.FirstOrDefault(f => f.Name == propertyname);
+            if (result != null)
+            {
+                var colorobj = result.GetValue(this) ;
+
+                if (colorobj is Color)
+                {
+                    Color c = (Color) colorobj;
+
+                    if (c == Red)
+                    {
+                        result.SetValue(this, Black);
+                    }
+                    else
+                    {
+                        result.SetValue(this, Red);
+                    }
+                }
+            }
+
+        }
+
     }
 }

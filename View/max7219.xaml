@@ -24,84 +24,84 @@
         </Grid.Resources>
         <StackPanel HorizontalAlignment="Left" Height="Auto" Margin="00" VerticalAlignment="Top" Width="Auto" Orientation="Vertical">
             <StackPanel HorizontalAlignment="Left" Height="Auto" Margin="0" VerticalAlignment="Top" Width="Auto" Orientation="Horizontal" Name="A">
-                <Ellipse  Name="A1" Fill="{Binding A1_fill, Converter={StaticResource ColorToBrushConverter} }" />
-                <Ellipse  Name="A2" Fill="{Binding A2_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse  Name="A3" Fill="{Binding A3_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse  Name="A4" Fill="{Binding A4_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse  Name="A5" Fill="{Binding A5_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse  Name="A6" Fill="{Binding A6_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse  Name="A7" Fill="{Binding A7_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse  Name="A8" Fill="{Binding A8_fill, Converter={StaticResource ColorToBrushConverter} }"/>
+                <Ellipse  Name="A1" Fill="{Binding A1_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse  Name="A2" Fill="{Binding A2_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse  Name="A3" Fill="{Binding A3_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse  Name="A4" Fill="{Binding A4_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse  Name="A5" Fill="{Binding A5_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse  Name="A6" Fill="{Binding A6_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse  Name="A7" Fill="{Binding A7_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse  Name="A8" Fill="{Binding A8_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" Height="Auto" Margin="0" VerticalAlignment="Top" Width="Auto" Orientation="Horizontal" Name="B">
-                <Ellipse   Name="B1"  Fill="{Binding B1_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="B2"  Fill="{Binding B2_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="B3"  Fill="{Binding B3_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="B4"  Fill="{Binding B4_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="B5"  Fill="{Binding B5_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="B6"  Fill="{Binding B6_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="B7"  Fill="{Binding B7_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="B8"  Fill="{Binding B8_fill, Converter={StaticResource ColorToBrushConverter} }"/>
+                <Ellipse   Name="B1"  Fill="{Binding B1_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="B2"  Fill="{Binding B2_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="B3"  Fill="{Binding B3_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="B4"  Fill="{Binding B4_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="B5"  Fill="{Binding B5_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="B6"  Fill="{Binding B6_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="B7"  Fill="{Binding B7_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="B8"  Fill="{Binding B8_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" Height="Auto" Margin="0" VerticalAlignment="Top" Width="Auto" Orientation="Horizontal" Name="C">
-                <Ellipse   Name="C1"   Fill="{Binding C1_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="C2"   Fill="{Binding C2_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="C3"   Fill="{Binding C3_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="C4"   Fill="{Binding C4_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="C5"   Fill="{Binding C5_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="C6"   Fill="{Binding C6_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="C7"   Fill="{Binding C7_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="C8"   Fill="{Binding C8_fill, Converter={StaticResource ColorToBrushConverter} }"/>
+                <Ellipse   Name="C1"   Fill="{Binding C1_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="C2"   Fill="{Binding C2_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="C3"   Fill="{Binding C3_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="C4"   Fill="{Binding C4_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="C5"   Fill="{Binding C5_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="C6"   Fill="{Binding C6_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="C7"   Fill="{Binding C7_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="C8"   Fill="{Binding C8_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" Height="Auto" Margin="0" VerticalAlignment="Top" Width="Auto" Orientation="Horizontal" Name="D">
-                <Ellipse    Name="D1"   Fill="{Binding D1_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="D2"   Fill="{Binding D2_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="D3"   Fill="{Binding D3_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="D4"   Fill="{Binding D4_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="D5"   Fill="{Binding D5_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="D6"   Fill="{Binding D6_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="D7"   Fill="{Binding D7_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="D8"   Fill="{Binding D8_fill, Converter={StaticResource ColorToBrushConverter} }"/>
+                <Ellipse    Name="D1"   Fill="{Binding D1_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="D2"   Fill="{Binding D2_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="D3"   Fill="{Binding D3_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="D4"   Fill="{Binding D4_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="D5"   Fill="{Binding D5_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="D6"   Fill="{Binding D6_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="D7"   Fill="{Binding D7_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="D8"   Fill="{Binding D8_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" Height="Auto" Margin="0" VerticalAlignment="Top" Width="Auto" Orientation="Horizontal"  Name="E">
-                <Ellipse   Name="E1"   Fill="{Binding E1_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="E2"   Fill="{Binding E2_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="E3"   Fill="{Binding E3_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="E4"   Fill="{Binding E4_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="E5"   Fill="{Binding E5_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="E6"   Fill="{Binding E6_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="E7"   Fill="{Binding E7_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="E8"   Fill="{Binding E8_fill, Converter={StaticResource ColorToBrushConverter} }"/>
+                <Ellipse   Name="E1"   Fill="{Binding E1_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="E2"   Fill="{Binding E2_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="E3"   Fill="{Binding E3_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="E4"   Fill="{Binding E4_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="E5"   Fill="{Binding E5_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="E6"   Fill="{Binding E6_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="E7"   Fill="{Binding E7_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="E8"   Fill="{Binding E8_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" Height="Auto" Margin="0" VerticalAlignment="Top" Width="Auto" Orientation="Horizontal" Name="F">
-                <Ellipse    Name="F1"   Fill="{Binding F1_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="F2"   Fill="{Binding F2_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="F3"   Fill="{Binding F3_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="F4"   Fill="{Binding F4_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="F5"   Fill="{Binding F5_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="F6"   Fill="{Binding F6_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="F7"   Fill="{Binding F7_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="F8"   Fill="{Binding F8_fill, Converter={StaticResource ColorToBrushConverter} }"/>
+                <Ellipse    Name="F1"   Fill="{Binding F1_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="F2"   Fill="{Binding F2_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="F3"   Fill="{Binding F3_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="F4"   Fill="{Binding F4_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="F5"   Fill="{Binding F5_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="F6"   Fill="{Binding F6_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="F7"   Fill="{Binding F7_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="F8"   Fill="{Binding F8_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" Height="Auto" Margin="0" VerticalAlignment="Top" Width="Auto" Orientation="Horizontal" Name="G">
-                <Ellipse   Name="G1"   Fill="{Binding G1_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="G2"   Fill="{Binding G2_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="G3"   Fill="{Binding G3_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="G4"   Fill="{Binding G4_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="G5"   Fill="{Binding G5_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="G6"   Fill="{Binding G6_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="G7"   Fill="{Binding G7_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse   Name="G8"   Fill="{Binding G8_fill, Converter={StaticResource ColorToBrushConverter} }"/>
+                <Ellipse   Name="G1"   Fill="{Binding G1_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="G2"   Fill="{Binding G2_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="G3"   Fill="{Binding G3_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="G4"   Fill="{Binding G4_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="G5"   Fill="{Binding G5_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="G6"   Fill="{Binding G6_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="G7"   Fill="{Binding G7_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse   Name="G8"   Fill="{Binding G8_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left" Height="Auto" Margin="0" VerticalAlignment="Top" Width="Auto" Orientation="Horizontal" Name="H">
-                <Ellipse    Name="H1"   Fill="{Binding H1_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="H2"   Fill="{Binding H2_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="H3"   Fill="{Binding H3_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="H4"   Fill="{Binding H4_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="H5"   Fill="{Binding H5_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="H6"   Fill="{Binding H6_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="H7"   Fill="{Binding H7_fill, Converter={StaticResource ColorToBrushConverter} }"/>
-                <Ellipse    Name="H8"   Fill="{Binding H8_fill, Converter={StaticResource ColorToBrushConverter} }"/>
+                <Ellipse    Name="H1"   Fill="{Binding H1_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="H2"   Fill="{Binding H2_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="H3"   Fill="{Binding H3_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="H4"   Fill="{Binding H4_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="H5"   Fill="{Binding H5_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="H6"   Fill="{Binding H6_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="H7"   Fill="{Binding H7_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
+                <Ellipse    Name="H8"   Fill="{Binding H8_fill, Converter={StaticResource ColorToBrushConverter} }" MouseDown="OnMouseClick"/>
             </StackPanel>
 
         </StackPanel>

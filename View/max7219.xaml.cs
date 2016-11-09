@@ -26,5 +26,19 @@ namespace LedGeekBox.View
             InitializeComponent();
             DataContext = new ViewModelMax7219();
         }
+
+
+        public void OnMouseClick(object sender, EventArgs e)
+        {
+            var dc = DataContext as ViewModelMax7219;
+            if (dc != null)
+            {
+                var ellipse = sender as Ellipse;
+                if (ellipse != null)
+                {
+                    dc.OnMouseClick(ellipse.Name);
+                }
+            }
+        }
     }
 }
