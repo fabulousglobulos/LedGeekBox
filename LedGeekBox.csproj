@@ -60,6 +60,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\DesignEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,8 +84,12 @@
     <Compile Include="Model\Scenario\HourScenario.cs" />
     <Compile Include="Model\Scenario\IScenario.cs" />
     <Compile Include="Model\ThreadObject.cs" />
+    <Compile Include="ViewModel\ViewModelDesignEditor.cs" />
     <Compile Include="View\ColorToBrushConverter.cs" />
     <Compile Include="Model\Configuration.cs" />
+    <Compile Include="View\DesignEditor.xaml.cs">
+      <DependentUpon>DesignEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MaxLayout.xaml.cs">
       <DependentUpon>MaxLayout.xaml</DependentUpon>
     </Compile>

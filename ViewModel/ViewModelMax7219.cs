@@ -15,9 +15,11 @@ namespace LedGeekBox.ViewModel
         private static Color Black = Color.FromRgb(0, 0, 0);
         private static Color Red = Color.FromRgb(255, 0, 0);
 
+
+        public bool DesignMode { get; set; }
+
         public ViewModelMax7219()
         {
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -1181,7 +1183,7 @@ namespace LedGeekBox.ViewModel
 
         }
 
-        public void OnMouseClick(string ellipsename)
+        public void OnMouseOver(string ellipsename)
         {
             string propertyname = ellipsename + "_fill";
             var fieldInfos = GetType().GetProperties();
@@ -1206,6 +1208,8 @@ namespace LedGeekBox.ViewModel
             }
 
         }
+
+
 
     }
 }

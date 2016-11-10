@@ -25,6 +25,23 @@ namespace LedGeekBox.ViewModel
         private static Color Black = Color.FromRgb(0, 0, 0);
         private static Color Red = Color.FromRgb(255, 0, 0);
 
+        public bool DesignMode
+        {
+            set
+            {
+                vm1.DesignMode = value;
+                vm2.DesignMode = value;
+                vm3.DesignMode = value;
+                vm4.DesignMode = value;
+                vm5.DesignMode = value;
+                vm6.DesignMode = value;
+                vm7.DesignMode = value;
+                vm8.DesignMode = value;
+                vm9.DesignMode = value;
+                vm10.DesignMode = value;
+            }
+        }
+        
         public ViewModelMaxLayout(List<ViewModelMax7219> vms)
         {
             vm1 = vms[0];

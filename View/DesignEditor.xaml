@@ -1,0 +1,18 @@
+﻿<Window x:Class="LedGeekBox.View.DesignEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:z="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:LedGeekBox.View"
+        mc:Ignorable="d"
+        Title="DesignEditor"   z:DesignHeight="550"   z:DesignWidth="900"  SizeToContent="WidthAndHeight">
+    <Grid>
+        <WrapPanel Orientation="Vertical">
+        <local:MaxLayout  x:Name="maxlayout"></local:MaxLayout>
+        <Button Command="{Binding Path=ClearCommand}"  Height="20"  Content="Clear Screen" HorizontalAlignment="Center"></Button>
+            <Button Command="{Binding Path=Forwar2ArduinoCommand}"  Height="20"  Content="Forward 2 Arduino" HorizontalAlignment="Center"></Button>
+
+        </WrapPanel>
+    </Grid>
+</Window>

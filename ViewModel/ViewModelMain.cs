@@ -220,12 +220,14 @@ namespace LedGeekBox.ViewModel
 
         public void DesignModeClick()
         {
-            var vm = steps[0] as ViewModelMaxLayout;
-            if (vm != null)
-            {
-                var result = vm.ReadScreen();
-                steps[1].Apply(result);
-            }
+            new DesignEditor( arduino).ShowDialog();
+            
+            //var vm = steps[0] as ViewModelMaxLayout;
+            //if (vm != null)
+            //{
+            //    var result = vm.ReadScreen();
+            //    steps[1].Apply(result);
+            //}
         }
 
         public static List<bool[,]> ConverToList(bool[,] datas)

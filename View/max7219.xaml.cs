@@ -28,15 +28,27 @@ namespace LedGeekBox.View
         }
 
 
-        public void OnMouseClick(object sender, EventArgs e)
+        public void OnMouseEnter(object sender, EventArgs e)
         {
             var dc = DataContext as ViewModelMax7219;
             if (dc != null)
             {
+                if (!dc.DesignMode)
+                {//not in design mode, user can edit manually in design mode, in display (main mode) feature not available
+                    return;
+                }
+
+                //confirm that mosue button have been pressed
+                if (Mouse.LeftButton != MouseButtonState.Pressed)
+                {
+                    return;
+                }
+             
+                //it is really an ellopse object! (normmaly anything else is not possible
                 var ellipse = sender as Ellipse;
                 if (ellipse != null)
                 {
-                    dc.OnMouseClick(ellipse.Name);
+                    dc.OnMouseOver(ellipse.Name);
                 }
             }
         }
