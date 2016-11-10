@@ -113,8 +113,7 @@ namespace LedGeekBox.Model
                     line6 += c[5, i] ? "#" : "_";
                     line7 += c[6, i] ? "#" : "_";
                     line8 += c[7, i] ? "#" : "_";
-
-                   }
+                }
                 line1 += " ";
                 line2 += " ";
                 line3 += " ";
@@ -123,7 +122,6 @@ namespace LedGeekBox.Model
                 line6 += " ";
                 line7 += " ";
                 line8 += " ";
-
             }
 
             Trace.Write(line1 + Environment.NewLine);
@@ -134,15 +132,6 @@ namespace LedGeekBox.Model
             Trace.Write(line6 + Environment.NewLine);
             Trace.Write(line7 + Environment.NewLine);
             Trace.Write(line8 + Environment.NewLine);
-
-            //Trace.Write(line21 + Environment.NewLine);
-            //Trace.Write(line22 + Environment.NewLine);
-            //Trace.Write(line23 + Environment.NewLine);
-            //Trace.Write(line24 + Environment.NewLine);
-            //Trace.Write(line25 + Environment.NewLine);
-            //Trace.Write(line26 + Environment.NewLine);
-            //Trace.Write(line27 + Environment.NewLine);
-            //Trace.Write(line28 + Environment.NewLine);
         }
 
         public static void RenderingGeneric(object param)
@@ -154,9 +143,9 @@ namespace LedGeekBox.Model
 
 
 
-        public static void Build(string whatToWrite1, string whatToWrite2, out List<bool[,]> msg1, out List<bool[,]> msg2,out int max, out int totallenght1 , out int totallenght2)
+        public static void Build(string whatToWrite1, string whatToWrite2, out List<bool[,]> msg1, out List<bool[,]> msg2, out int max, out int totallenght1, out int totallenght2)
         {
-             totallenght1 = 0;
+            totallenght1 = 0;
 
             msg1 = new List<bool[,]>();
             foreach (char x in whatToWrite1)
@@ -165,14 +154,8 @@ namespace LedGeekBox.Model
                 totallenght1 += y.GetLength(1);
                 msg1.Add(y);
             }
-           //msg1 = whatToWrite1.ToList().Select(x =>
-           // {
-           //     var y = Helper.Get(x.ToString());
-           //     totallenght1 += y.GetLength(1);
-           //     return y;
-           // }).ToList();
 
-             totallenght2 = 0;
+            totallenght2 = 0;
 
             msg2 = new List<bool[,]>();
             foreach (char x in whatToWrite2)
@@ -189,41 +172,18 @@ namespace LedGeekBox.Model
             {
                 max = totallenght2;
             }
-
-            //List<bool[,]> msg2 = whatToWrite2.ToList().Select(x =>
-            //{
-            //    var y = Helper.Get(x.ToString());
-            //    totallenght2 += y.GetLength(1);
-            //    return y;
-            //}).ToList();
         }
 
         //TODO use : whitetowrite2
         static void Rendering(string whatToWrite1, string whatToWrite2, List<IStep> stp)
         {
-            //int totallenght1 = 0;
-            //List<bool[,]> msg1 = whatToWrite1.ToList().Select(x =>
-            //{
-            //    var y = Helper.Get(x.ToString());
-            //    totallenght1 += y.GetLength(1);
-            //    return y;
-            //}).ToList();
-
-            //int totallenght2 = 0;
-            //List<bool[,]> msg2 = whatToWrite2.ToList().Select(x =>
-            //{
-            //    var y = Helper.Get(x.ToString());
-            //    totallenght2 += y.GetLength(1);
-            //    return y;
-            //}).ToList();
-
             int totallenght1 = 0;
             int totallenght2 = 0;
             List<bool[,]> msg1 = null;
             List<bool[,]> msg2 = null;
 
             int tmpmax = 0;
-            Build(whatToWrite1, whatToWrite2, out msg1, out msg2, out tmpmax,out totallenght1, out totallenght2 );
+            Build(whatToWrite1, whatToWrite2, out msg1, out msg2, out tmpmax, out totallenght1, out totallenght2);
 
 
             log(msg1);
@@ -237,14 +197,11 @@ namespace LedGeekBox.Model
             {
                 for (int j = 0; j < x.GetLength(1); j++)
                 {
-                    mainmessage1[0, localcursor] = x[0, j];
-                    mainmessage1[1, localcursor] = x[1, j];
-                    mainmessage1[2, localcursor] = x[2, j];
-                    mainmessage1[3, localcursor] = x[3, j];
-                    mainmessage1[4, localcursor] = x[4, j];
-                    mainmessage1[5, localcursor] = x[5, j];
-                    mainmessage1[6, localcursor] = x[6, j];
-                    mainmessage1[7, localcursor] = x[7, j];
+                    for (int inc = 0; inc < Definition.Number_Led_X_Max7219; inc++)
+                    {
+                        mainmessage1[inc, localcursor] = x[inc, j];
+                    }
+
                     localcursor++;
                 }
             }
@@ -254,22 +211,19 @@ namespace LedGeekBox.Model
             {
                 for (int j = 0; j < x.GetLength(1); j++)
                 {
-                    mainmessage2[0, localcursor] = x[0, j];
-                    mainmessage2[1, localcursor] = x[1, j];
-                    mainmessage2[2, localcursor] = x[2, j];
-                    mainmessage2[3, localcursor] = x[3, j];
-                    mainmessage2[4, localcursor] = x[4, j];
-                    mainmessage2[5, localcursor] = x[5, j];
-                    mainmessage2[6, localcursor] = x[6, j];
-                    mainmessage2[7, localcursor] = x[7, j];
+                    for (int inc = 0; inc < Definition.Number_Led_X_Max7219; inc++)
+                    {
+                        mainmessage2[inc, localcursor] = x[inc, j];
+                    }
+                    
                     localcursor++;
                 }
             }
 
-            if (totallenght1 < 40)
+            if (totallenght1 < Definition.Number_Led_X_total)
             {
                 //center the message
-                double reste1 = (40 - totallenght1) / 2.0;
+                double reste1 = (Definition.Number_Led_X_total - totallenght1) / 2.0;
                 int final1 = Convert.ToInt32(reste1);
                 double division1 = reste1 - final1;
                 if (division1 >= 0.5)
@@ -278,16 +232,16 @@ namespace LedGeekBox.Model
                 }
                 if (final1 > 0)
                 {
-                    mainmessage1 = Merge(new bool[8, final1], mainmessage1);
+                    mainmessage1 = Merge(new bool[Definition.Number_Led_X_Max7219, final1], mainmessage1);
                     totallenght1 = totallenght1 + final1;
                 }
 
             }
 
 
-            if (totallenght2 < 40)
+            if (totallenght2 < Definition.Number_Led_X_total)
             {//center the message
-                double reste2 = (40 - totallenght2) / 2.0;
+                double reste2 = (Definition.Number_Led_X_total - totallenght2) / 2.0;
                 int final2 = Convert.ToInt32(reste2);
                 double division2 = reste2 - final2;
                 if (division2 >= 0.5)
@@ -296,19 +250,19 @@ namespace LedGeekBox.Model
                 }
                 if (final2 > 0)
                 {
-                    mainmessage2 = Merge(new bool[8, final2], mainmessage2);
+                    mainmessage2 = Merge(new bool[Definition.Number_Led_X_Max7219, final2], mainmessage2);
                     totallenght2 = totallenght2 + final2;
                 }
             }
 
-            int offsetstatic1 = totallenght1 - 5 * 8;
+            int offsetstatic1 = totallenght1 - Definition.Number_Led_X_total;
             if (offsetstatic1 < 0)
             {
                 offsetstatic1 = 0;
             }
 
 
-            int offsetstatic2 = totallenght2 - 5 * 8;
+            int offsetstatic2 = totallenght2 - Definition.Number_Led_X_total;
             if (offsetstatic2 < 0)
             {
                 offsetstatic2 = 0;
@@ -319,18 +273,17 @@ namespace LedGeekBox.Model
             for (int o1 = 0; o1 <= max; o1++)
             {
                 List<bool[,]> dico = new List<bool[,]>();
-
-
+                
                 List<bool[,]> z = new List<bool[,]>();
                 #region 1
 
                 int index = 0;
                 int smallindex = 0;
-                bool[,] current = new bool[8, 8];
+                bool[,] current = new bool[Definition.Number_Led_X_Max7219, Definition.Number_Led_Y_Max7219];
 
                 bool touched = false;
 
-                for (int i =  o1; i < (5 * 8 + o1); i++)
+                for (int i = o1; i < (Definition.Number_Led_X_total + o1); i++)
                 {
                     index = i;
 
@@ -339,50 +292,40 @@ namespace LedGeekBox.Model
                         break;
                     }
 
-                    if (smallindex > 7) //on cherche a remplir uniquement une matrix, sinon on passe au suivant
+                    if (smallindex > (Definition.Number_Led_X_Max7219-1)) //on cherche a remplir uniquement une matrix, sinon on passe au suivant
                     {
                         z.Add(current);
-                        current = new bool[8, 8];
+                        current = new bool[Definition.Number_Led_X_Max7219, Definition.Number_Led_Y_Max7219];
                         smallindex = 0;
                     }
                     if (i < totallenght1)
                     {
                         if (index < mainmessage1.GetLength(1))
                         {
-                            current[0, smallindex] = mainmessage1[0, index];
-                            current[1, smallindex] = mainmessage1[1, index];
-                            current[2, smallindex] = mainmessage1[2, index];
-                            current[3, smallindex] = mainmessage1[3, index];
-
-                            current[4, smallindex] = mainmessage1[4, index];
-                            current[5, smallindex] = mainmessage1[5, index];
-                            current[6, smallindex] = mainmessage1[6, index];
-                            current[7, smallindex] = mainmessage1[7, index];
+                            for (int inc = 0; inc < Definition.Number_Led_X_Max7219; inc++)
+                            {
+                                current[inc, smallindex] = mainmessage1[inc, index];
+                            }
                         }
                         else
-                        {
-                            current[0, smallindex] = false;
-                            current[1, smallindex] = false;
-                            current[2, smallindex] = false;
-                            current[3, smallindex] = false;
-
-                            current[4, smallindex] = false;
-                            current[5, smallindex] = false;
-                            current[6, smallindex] = false;
-                            current[7, smallindex] = false;
+                        { 
+                            for (int inc = 0; inc < Definition.Number_Led_X_Max7219; inc++)
+                            {
+                                current[inc, smallindex] = false;
+                            }
                         }
                     }
                     touched = true;
                     smallindex++;
 
-                    if ((index == ((5 * 8) - 1) + o1) && (smallindex != 1))
+                    if ((index == (Definition.Number_Led_X_total - 1) + o1) && (smallindex != 1))
                     {
                         z.Add(current);
                         touched = false;
                     }
                 }
-              //  if (z.Count == 4)
-                if(touched)
+
+                if (touched)
                 {
                     z.Add(current);
                 }
@@ -401,11 +344,11 @@ namespace LedGeekBox.Model
 
                 int index2 = 0;
                 int smallindex2 = 0;
-                bool[,] current2 = new bool[8, 8];
+                bool[,] current2 = new bool[Definition.Number_Led_X_Max7219, Definition.Number_Led_Y_Max7219];
 
                 bool touched2 = false;
 
-                for (int i2 = (0 + o1); i2 < (5 * 8 + o1); i2++)
+                for (int i2 = (0 + o1); i2 < (Definition.Number_Led_X_total + o1); i2++)
                 {
                     index2 = i2;
 
@@ -417,46 +360,36 @@ namespace LedGeekBox.Model
                     if (smallindex2 > 7) //on cherche a remplir uniquement une matrix, sinon on passe au suivant
                     {
                         z2.Add(current2);
-                        current2 = new bool[8, 8];
+                        current2 = new bool[Definition.Number_Led_X_Max7219, Definition.Number_Led_Y_Max7219];
                         smallindex2 = 0;
                     }
                     if (i2 < totallenght2)
                     {
                         if (index2 < mainmessage2.GetLength(1))
                         {
-                            current2[0, smallindex2] = mainmessage2[0, index2];
-                            current2[1, smallindex2] = mainmessage2[1, index2];
-                            current2[2, smallindex2] = mainmessage2[2, index2];
-                            current2[3, smallindex2] = mainmessage2[3, index2];
-
-                            current2[4, smallindex2] = mainmessage2[4, index2];
-                            current2[5, smallindex2] = mainmessage2[5, index2];
-                            current2[6, smallindex2] = mainmessage2[6, index2];
-                            current2[7, smallindex2] = mainmessage2[7, index2];
+                            for (int inc = 0; inc < Definition.Number_Led_X_Max7219; inc++)
+                            {
+                                current2[inc, smallindex2] = mainmessage2[inc, index2];
+                            }
                         }
                         else
                         {
-                            current2[0, smallindex2] = false;
-                            current2[1, smallindex2] = false;
-                            current2[2, smallindex2] = false;
-                            current2[3, smallindex2] = false;
-                                              
-                            current2[4, smallindex2] = false;
-                            current2[5, smallindex2] = false;
-                            current2[6, smallindex2] = false;
-                            current2[7, smallindex2] = false;
+                            for (int inc = 0; inc < Definition.Number_Led_X_Max7219; inc++)
+                            {
+                                current2[inc, smallindex2] = false;
+                            }
                         }
                     }
 
                     smallindex2++;
                     touched2 = true;
-                    if ((index2 == ((5 * 8) - 1) + o1) && (smallindex2 != 1))
+                    if ((index2 == (Definition.Number_Led_X_total - 1) + o1) && (smallindex2 != 1))
                     {
                         z2.Add(current2);
                         touched2 = false;
                     }
                 }
-               if(touched2)// if (z2.Count == 4)
+                if (touched2)// if (z2.Count == 4)
                 {
                     z2.Add(current2);
                 }
@@ -472,82 +405,9 @@ namespace LedGeekBox.Model
                 stp.ForEach(s => s.Apply(dico));
                 Thread.Sleep(period);
             }
-
-
             Thread.Sleep(period * 2);
-
-
         }
-
-
-        ////////////////////////////////////////
-
-
-
-
-
-
-        //    //Thread.Sleep(period * 2);
-
-        //    for (int o2 = 0; o2 <= offsetstatic1; o2++)
-        //    {
-        //        List<bool[,]> z2 = new List<bool[,]>();
-
-        //        int index2 = 0;
-        //        int smallindex2 = 0;
-        //        bool[,] current2 = new bool[8, 8];
-
-        //        for (int i2 = (0 + o2); i2 < (5 * 8 + o2); i2++)
-        //        {
-        //            index2 = i2;
-
-        //            if (index2 > totallenght2 + 1) //on a depasser la taille total du message le message !
-        //            {
-        //                break;
-        //            }
-
-        //            if (smallindex2 > 7) //on cherche a remplir uniquement une matrix, sinon on passe au suivant
-        //            {
-        //                z2.Add(current2);
-        //                current2 = new bool[8, 8];
-        //                smallindex2 = 0;
-        //            }
-        //            if (i2 < totallenght2)
-        //            {
-        //                current2[0, smallindex2] = mainmessage2[0, index2];
-        //                current2[1, smallindex2] = mainmessage2[1, index2];
-        //                current2[2, smallindex2] = mainmessage2[2, index2];
-        //                current2[3, smallindex2] = mainmessage2[3, index2];
-
-        //                current2[4, smallindex2] = mainmessage2[4, index2];
-        //                current2[5, smallindex2] = mainmessage2[5, index2];
-        //                current2[6, smallindex2] = mainmessage2[6, index2];
-        //                current2[7, smallindex2] = mainmessage2[7, index2];
-        //            }
-
-        //            smallindex2++;
-
-        //            if ((index2 == ((5 * 8) - 1) + o2) && (smallindex2 != 1))
-        //            {
-        //                z2.Add(current2);
-        //            }
-        //        }
-        //        if (z2.Count == 4)
-        //        {
-        //            z2.Add(current2);
-        //        }
-
-        //        dico.Add(z2.Count > 0 ? z2[0] : Helper.EmptyMatrix);
-        //        dico.Add(z2.Count > 1 ? z2[1] : Helper.EmptyMatrix);
-        //        dico.Add(z2.Count > 2 ? z2[2] : Helper.EmptyMatrix);
-        //        dico.Add(z2.Count > 3 ? z2[3] : Helper.EmptyMatrix);
-        //        dico.Add(z2.Count > 4 ? z2[4] : Helper.EmptyMatrix);
-
-        //        stp.ForEach(s => s.Apply(dico));
-
-        //    }
-        //    Thread.Sleep(period * 2);
-        //}
+        
 
 
         static bool[,] Merge(bool[,] original, bool[,] added)
@@ -557,20 +417,15 @@ namespace LedGeekBox.Model
 
             int addedX = added.GetLength(0);
             int addedY = added.GetLength(1);
-            var final = new bool[8, originalY + addedY];
+            var final = new bool[Definition.Number_Led_X_Max7219, originalY + addedY];
 
             for (int i = 0; i < addedY; i++)
             {
-                final[0, i + originalY] = added[0, i];
-                final[1, i + originalY] = added[1, i];
-                final[2, i + originalY] = added[2, i];
-                final[3, i + originalY] = added[3, i];
-                final[4, i + originalY] = added[4, i];
-                final[5, i + originalY] = added[5, i];
-                final[6, i + originalY] = added[6, i];
-                final[7, i + originalY] = added[7, i];
+                for (int inc = 0; inc < Definition.Number_Led_X_Max7219; inc++)
+                {
+                    final[inc, i + originalY] = added[inc, i];
+                }
             }
-
             return final;
         }
 
@@ -594,19 +449,15 @@ namespace LedGeekBox.Model
             {
                 for (int j = 0; j < x.GetLength(1); j++)
                 {
-                    mainmessage[0, localcursor] = x[0, j];
-                    mainmessage[1, localcursor] = x[1, j];
-                    mainmessage[2, localcursor] = x[2, j];
-                    mainmessage[3, localcursor] = x[3, j];
-                    mainmessage[4, localcursor] = x[4, j];
-                    mainmessage[5, localcursor] = x[5, j];
-                    mainmessage[6, localcursor] = x[6, j];
-                    mainmessage[7, localcursor] = x[7, j];
+                    for (int inc = 0; inc < Definition.Number_Led_X_Max7219; inc++)
+                    {
+                        mainmessage[inc, localcursor] = x[inc, j];
+                    }
                     localcursor++;
                 }
             }
 
-            int offsetstatic = totallenght - 5 * 8;
+            int offsetstatic = totallenght - Definition.Number_Led_X_total;
             if (offsetstatic < 0)
             {
                 offsetstatic = 0;
@@ -620,9 +471,9 @@ namespace LedGeekBox.Model
 
                 int index = 0;
                 int smallindex = 0;
-                bool[,] current = new bool[8, 8];
+                bool[,] current = new bool[Definition.Number_Led_X_Max7219, Definition.Number_Led_Y_Max7219];
 
-                for (int i = (0 + o); i < (5 * 8 + o); i++)
+                for (int i = (0 + o); i < (Definition.Number_Led_X_total + o); i++)
                 {
                     index = i;
 
@@ -631,46 +482,34 @@ namespace LedGeekBox.Model
                         break;
                     }
 
-                    if (smallindex > 7) //on cherche a remplir uniquement une matrix, sinon on passe au suivant
+                    if (smallindex > (Definition.Number_Led_X_Max7219-1)) //on cherche a remplir uniquement une matrix, sinon on passe au suivant
                     {
                         z.Add(current);
-                        current = new bool[8, 8];
+                        current = new bool[Definition.Number_Led_X_Max7219, Definition.Number_Led_Y_Max7219];
                         smallindex = 0;
                     }
                     if (i < totallenght)
                     {
-                        current[0, smallindex] = mainmessage[0, index];
-                        current[1, smallindex] = mainmessage[1, index];
-                        current[2, smallindex] = mainmessage[2, index];
-                        current[3, smallindex] = mainmessage[3, index];
-
-                        current[4, smallindex] = mainmessage[4, index];
-                        current[5, smallindex] = mainmessage[5, index];
-                        current[6, smallindex] = mainmessage[6, index];
-                        current[7, smallindex] = mainmessage[7, index];
+                        for (int inc = 0; inc < Definition.Number_Led_X_Max7219; inc++)
+                        {
+                            current[inc, smallindex] = mainmessage[inc, index];
+                        }
                     }
 
                     smallindex++;
 
-                    if ((index == ((5 * 8) - 1) + o) && (smallindex != 1))
+                    if ((index == (Definition.Number_Led_X_total - 1) + o) && (smallindex != 1))
                     {
                         z.Add(current);
                     }
                 }
 
                 List<bool[,]> dico = new List<bool[,]>();
-                dico.Add(z.Count > 0 ? z[0] : Helper.EmptyMatrix);
-                dico.Add(z.Count > 1 ? z[1] : Helper.EmptyMatrix);
-                dico.Add(z.Count > 2 ? z[2] : Helper.EmptyMatrix);
-                dico.Add(z.Count > 3 ? z[3] : Helper.EmptyMatrix);
-                dico.Add(z.Count > 4 ? z[4] : Helper.EmptyMatrix);
 
-
-                dico.Add(z.Count > 5 ? z[5] : Helper.EmptyMatrix);
-                dico.Add(z.Count > 6 ? z[6] : Helper.EmptyMatrix);
-                dico.Add(z.Count > 7 ? z[7] : Helper.EmptyMatrix);
-                dico.Add(z.Count > 8 ? z[8] : Helper.EmptyMatrix);
-                dico.Add(z.Count > 9 ? z[9] : Helper.EmptyMatrix);
+                for (int inc = 0; inc <( Definition.Number_Max7219_X * Definition.Number_Max7219_Y); inc++)
+                {
+                    dico.Add(z.Count > inc ? z[inc] : Helper.EmptyMatrix);
+                }
 
                 stp.Apply(dico);
 
