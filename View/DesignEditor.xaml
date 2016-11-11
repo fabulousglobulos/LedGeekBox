@@ -7,11 +7,27 @@
         xmlns:local="clr-namespace:LedGeekBox.View"
         mc:Ignorable="d"
         Title="DesignEditor"   z:DesignHeight="550"   z:DesignWidth="900"  SizeToContent="WidthAndHeight">
+
+
     <Grid>
         <WrapPanel Orientation="Vertical">
-        <local:MaxLayout  x:Name="maxlayout"></local:MaxLayout>
-        <Button Command="{Binding Path=ClearCommand}"  Height="20"  Content="Clear Screen" HorizontalAlignment="Center"></Button>
+            <local:MaxLayout  x:Name="maxlayout"></local:MaxLayout>
+
+            <ListBox Margin="10" Name="designerListBox" ItemsSource="{Binding Datas}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Source="{Binding imageSource}" Stretch="UniformToFill"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Button Command="{Binding Path=ClearCommand}"  Height="20"  Content="Clear Screen" HorizontalAlignment="Center"></Button>
             <Button Command="{Binding Path=Forwar2ArduinoCommand}"  Height="20"  Content="Forward 2 Arduino" HorizontalAlignment="Center"></Button>
+            <Button Click="ButtonBase_OnClick"  Height="20"  Content="Export" HorizontalAlignment="Center"></Button>
+
+            <Button Click="ButtonAdd_OnClick"  Height="20"  Content="Add" HorizontalAlignment="Center"></Button>
 
         </WrapPanel>
     </Grid>
