@@ -39,6 +39,12 @@ namespace LedGeekBox.Model.Scenario
 
                             break;
                         }
+                    case "SNAKE":
+                        {
+                            sco = new SnakeScenario();
+
+                            break;
+                        }
                     case "PIXEL":
                         {
                             sco = new PixelScenario();

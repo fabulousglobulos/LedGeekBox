@@ -161,7 +161,8 @@ namespace LedGeekBox.ViewModel
             Reverse2 = true;
             var a = Helper.Get("a");//force to load setup
 
-            Scenarios = "HOUR()" + Environment.NewLine;
+            Scenarios += "SNAKE()" + Environment.NewLine;
+            Scenarios += "HOUR()" + Environment.NewLine;
             Scenarios += "SNOW()" + Environment.NewLine;
             Scenarios += "TEXT(msg1=#coucou c'est nous!;msg2=C0mment c@ v@ ? )" + Environment.NewLine;
             Scenarios += "PIXEL()" + Environment.NewLine;
