@@ -31,7 +31,9 @@ namespace LedGeekBox.View
             InitializeComponent();
             ViewModelMaxLayout vmLayout = maxlayout.DataContext as ViewModelMaxLayout;
             vmLayout.DesignMode = true;
-            DataContext = new ViewModelDesignEditor(vmLayout, arduino);
+            ViewModelDesignEditor vm = new ViewModelDesignEditor(vmLayout, arduino);
+            DataContext = vm;
+            vm.view = this;
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
@@ -48,6 +50,27 @@ namespace LedGeekBox.View
 
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
+            //RenderTargetBitmap rtb = new RenderTargetBitmap((int)maxlayout.ActualWidth, (int)maxlayout.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+            //rtb.Render(maxlayout);
+
+            //PngBitmapEncoder png = new PngBitmapEncoder();
+            //png.Frames.Add(BitmapFrame.Create(rtb));
+            //MemoryStream stream = new MemoryStream();
+            //png.Save(stream);
+
+            //Bitmap bit = new Bitmap(stream);
+
+            //Bitmap resizedBit = ResizeBitmap(bit, 200, 80);
+            //BitmapImage newimg = ToBitmapImage(resizedBit);
+            BitmapImage newimg = GetImage(maxlayout);
+
+            ViewModelDesignEditor vm = DataContext as ViewModelDesignEditor;
+            vm.Datas.Add(new binderClass { imageSource = newimg , rawData=vm.Read()});
+            vm.OnPropertyChanged("Datas");
+        }
+
+        public static BitmapImage GetImage( MaxLayout maxlayout)
+        {
             RenderTargetBitmap rtb = new RenderTargetBitmap((int)maxlayout.ActualWidth, (int)maxlayout.ActualHeight, 96, 96, PixelFormats.Pbgra32);
             rtb.Render(maxlayout);
 
@@ -55,15 +78,12 @@ namespace LedGeekBox.View
             png.Frames.Add(BitmapFrame.Create(rtb));
             MemoryStream stream = new MemoryStream();
             png.Save(stream);
-            
+
             Bitmap bit = new Bitmap(stream);
 
             Bitmap resizedBit = ResizeBitmap(bit, 200, 80);
             BitmapImage newimg = ToBitmapImage(resizedBit);
-
-            ViewModelDesignEditor vm = DataContext as ViewModelDesignEditor;
-            vm.Datas.Add(new binderClass { imageSource = newimg });
-            vm.OnPropertyChanged("Datas");
+            return newimg;
         }
 
 

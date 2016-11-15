@@ -29,7 +29,9 @@
 
             <Button Click="ButtonAdd_OnClick"  Height="20"  Content="Add" HorizontalAlignment="Center"></Button>
             <Button Command="{Binding Path=InvertCommand}"  Height="20"  Content="Invert" HorizontalAlignment="Center"></Button>
-
+            <Button Command="{Binding Path=SaveCommand}"  Height="20"  Content="Save" HorizontalAlignment="Center"></Button>
+            <Button Command="{Binding Path=LoadCommand}"  Height="20"  Content="Load" HorizontalAlignment="Center"></Button>
+            
         </WrapPanel>
     </Grid>
 </Window>
