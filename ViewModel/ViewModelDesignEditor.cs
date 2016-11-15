@@ -17,8 +17,8 @@ namespace LedGeekBox.ViewModel
 {
     public class binderClass
     {
-      //  public string imageLocation { get; set; }
-       public byte[,] rawData { get; set; }
+        //  public string imageLocation { get; set; }
+        public byte[,] rawData { get; set; }
 
         public BitmapImage imageSource { get; set; }
     }
@@ -44,6 +44,7 @@ namespace LedGeekBox.ViewModel
 
         public ICommand ClearCommand { get; set; }
         public ICommand Forwar2ArduinoCommand { get; set; }
+        public ICommand InvertCommand { get; set; }
 
         ViewModelMaxLayout _vmlayout;
         ArduinoDriver arduino;
@@ -54,8 +55,32 @@ namespace LedGeekBox.ViewModel
             arduino = arduinoDriver;
             ClearCommand = new RelayCommand(o => ClearClick());
             Forwar2ArduinoCommand = new RelayCommand(c => Forwar2ArduinoClick());
-
+            InvertCommand = new RelayCommand(x => InvertClick());
             Datas = new ObservableCollection<binderClass>();
+        }
+
+        public void InvertClick()
+        {
+            var screen = _vmlayout.ReadScreen();
+
+            List<bool[,]> datas = new List<bool[,]>();
+
+            foreach (var s in screen)
+            {
+                bool[,] newX = new bool[Definition.Number_Led_X_total, Definition.Number_Led_Y_total];
+                int x = s.GetLength(0);
+                int y = s.GetLength(1);
+
+                for (int i = 0; i < x; i++)
+                {
+                    for (int j = 0; j < y; j++)
+                    {
+                        newX[i, j] = !s[i, j];
+                    }
+                }
+                datas.Add(newX);
+            }
+            _vmlayout.Apply(datas);
         }
 
         public void ClearClick()

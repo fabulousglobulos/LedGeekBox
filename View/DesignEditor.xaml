@@ -28,6 +28,7 @@
             <Button Click="ButtonBase_OnClick"  Height="20"  Content="Export" HorizontalAlignment="Center"></Button>
 
             <Button Click="ButtonAdd_OnClick"  Height="20"  Content="Add" HorizontalAlignment="Center"></Button>
+            <Button Command="{Binding Path=InvertCommand}"  Height="20"  Content="Invert" HorizontalAlignment="Center"></Button>
 
         </WrapPanel>
     </Grid>
