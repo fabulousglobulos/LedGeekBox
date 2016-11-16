@@ -161,6 +161,7 @@ namespace LedGeekBox.ViewModel
             Reverse2 = true;
             var a = Helper.Get("a");//force to load setup
 
+            Scenarios += "MOVIE(file=pacman.xml)" + Environment.NewLine;
             Scenarios += "SNAKE()" + Environment.NewLine;
             Scenarios += "HOUR()" + Environment.NewLine;
             Scenarios += "SNOW()" + Environment.NewLine;
@@ -264,6 +265,35 @@ namespace LedGeekBox.ViewModel
             }
 
             return l;
+        }
+
+        public static bool[,]  ConverToMatrice(List<bool[,]> datas)
+        {
+            bool[,] matrice = new bool[40,16];
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    for (int k = 0; k < 8; k++)
+                    {
+                        matrice[i * 8 + j, k] = datas[i][ k,j]; 
+                    }
+                }
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    for (int k = 0; k < 8; k++)
+                    {
+                        matrice[i * 8 + j, k+8] = datas[i+5][k,j]; 
+                    }
+                }
+            }
+
+            return matrice;
         }
 
 

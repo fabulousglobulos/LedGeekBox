@@ -53,16 +53,8 @@ namespace LedGeekBox.Model.Scenario
                         }
                     case "TEXT":
                         {
-                            int first = s.IndexOf("(");
-                            string argumentsRaw = s.Substring(first + 1, s.Length - first - 2);
-                            var argumentsList = argumentsRaw.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
-                            Dictionary<string, string> arguments = new Dictionary<string, string>();
-                            foreach (string argumentsListItem in argumentsList)
-                            {
-                                string argName = argumentsListItem.Substring(0, argumentsListItem.IndexOf("=")).ToUpper();
-                                string argvalue = argumentsListItem.Substring(argumentsListItem.IndexOf("=") + 1);
-                                arguments.Add(argName, argvalue);
-                            }
+                            Dictionary<string, string> arguments = GetArguments(s);
+
                             sco = new TextScenario(arguments["MSG1"], arguments["MSG2"]);
 
                             break;
@@ -70,6 +62,13 @@ namespace LedGeekBox.Model.Scenario
                     case "FILLING":
                         {
                             sco = new FillingScenario();
+                            break;
+                        }
+                    case "MOVIE":
+                        {
+                            Dictionary<string, string> arguments = GetArguments(s);
+
+                            sco = new MovieScenario(arguments["FILE"]);
                             break;
                         }
                 }
@@ -81,6 +80,22 @@ namespace LedGeekBox.Model.Scenario
             }
 
             return scenar;
+        }
+
+
+        public static Dictionary<string, string> GetArguments(string rawarguments)
+        {
+            int first = rawarguments.IndexOf("(");
+            string argumentsRaw = rawarguments.Substring(first + 1, rawarguments.Length - first - 2);
+            var argumentsList = argumentsRaw.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+            Dictionary<string, string> arguments = new Dictionary<string, string>();
+            foreach (string argumentsListItem in argumentsList)
+            {
+                string argName = argumentsListItem.Substring(0, argumentsListItem.IndexOf("=")).ToUpper();
+                string argvalue = argumentsListItem.Substring(argumentsListItem.IndexOf("=") + 1);
+                arguments.Add(argName, argvalue);
+            }
+            return arguments;
         }
     }
 }

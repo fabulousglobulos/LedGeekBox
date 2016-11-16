@@ -111,5 +111,17 @@ namespace LedGeekBox.View
                 g.DrawImage(sourceBMP, 0, 0, width, height);
             return result;
         }
+
+ 
+
+        private void DesignerListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ViewModelDesignEditor vm = DataContext as ViewModelDesignEditor;
+            if (e.AddedItems.Count > 0)
+            {
+                binderClass cls = e.AddedItems[0] as binderClass;
+                vm.Apply(cls);
+            }
+        }
     }
 }

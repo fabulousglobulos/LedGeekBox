@@ -13,7 +13,8 @@
         <WrapPanel Orientation="Vertical">
             <local:MaxLayout  x:Name="maxlayout"></local:MaxLayout>
 
-            <ListBox Margin="10" Name="designerListBox" ItemsSource="{Binding Datas}">
+            <ListBox Margin="10" Name="designerListBox" ItemsSource="{Binding Datas}" MaxHeight="400" SelectionChanged="DesignerListBox_OnSelectionChanged">
+                <ScrollViewer.VerticalScrollBarVisibility>Auto</ScrollViewer.VerticalScrollBarVisibility>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -31,6 +32,7 @@
             <Button Command="{Binding Path=InvertCommand}"  Height="20"  Content="Invert" HorizontalAlignment="Center"></Button>
             <Button Command="{Binding Path=SaveCommand}"  Height="20"  Content="Save" HorizontalAlignment="Center"></Button>
             <Button Command="{Binding Path=LoadCommand}"  Height="20"  Content="Load" HorizontalAlignment="Center"></Button>
+            <Button Command="{Binding Path=ShiftRightCommand}"  Height="20"  Content="ShiftRight" HorizontalAlignment="Center"></Button>
             
         </WrapPanel>
     </Grid>

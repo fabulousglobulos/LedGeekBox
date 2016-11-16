@@ -79,6 +79,7 @@
     <Compile Include="Model\Scenario\FillingScenario.cs" />
     <Compile Include="Model\Scenario\ScenariosFactory.cs" />
     <Compile Include="Model\Scenario\PixelScenario.cs" />
+    <Compile Include="Model\Scenario\MovieScenario.cs" />
     <Compile Include="Model\Scenario\SnakeScenario.cs" />
     <Compile Include="Model\Scenario\SnowScenario.cs" />
     <Compile Include="Model\Scenario\TextScenario.cs" />

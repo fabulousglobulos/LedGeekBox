@@ -15,6 +15,7 @@ using System.Xml.Serialization;
 using LedGeekBox.Arduino;
 using LedGeekBox.View;
 using LedGeekBox.Model;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace LedGeekBox.ViewModel
 {
@@ -50,10 +51,11 @@ namespace LedGeekBox.ViewModel
         public ICommand InvertCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand LoadCommand { get; set; }
+        public ICommand ShiftRightCommand { get; set; }
 
         ViewModelMaxLayout _vmlayout;
         ArduinoDriver arduino;
-        public DesignEditor view  { get; set; }
+        public DesignEditor view { get; set; }
 
         public ViewModelDesignEditor(ViewModelMaxLayout vmlayout, ArduinoDriver arduinoDriver)
         {
@@ -64,7 +66,7 @@ namespace LedGeekBox.ViewModel
             InvertCommand = new RelayCommand(x => InvertClick());
             SaveCommand = new RelayCommand(s => SaveToFile());
             LoadCommand = new RelayCommand(l => LoadClick());
-
+            ShiftRightCommand = new RelayCommand(s => ShiftRightClick());
             Datas = new ObservableCollection<binderClass>();
         }
 
@@ -134,10 +136,6 @@ namespace LedGeekBox.ViewModel
             SerializeObject(final, file);
         }
 
-
-
-
-
         private static void SerializeObject<T>(T serializableObject, string fileName)
         {
             if (serializableObject == null) { return; }
@@ -198,13 +196,23 @@ namespace LedGeekBox.ViewModel
 
         public void LoadClick()
         {
-            var result = DeSerializeObject<List<int>>(file);
-            if (result != null && result.Count > 0)
+            var x = ViewModelDesignEditor.Get(file, _vmlayout, view);
+            if (x.Any())
             {
                 Datas.Clear();
+                x.ForEach(z => Datas.Add(z));
 
-                //MaxLayout layout = new MaxLayout();
-                //ViewModelMaxLayout vm = layout.DataContext as ViewModelMaxLayout;
+                OnPropertyChanged("Datas");
+                ClearClick();
+            }
+        }
+
+        public static List<binderClass> Get(string path2file, ViewModelMaxLayout _vmlayout, DesignEditor view)
+        {
+            List<binderClass> data = new List<binderClass>();
+            var result = DeSerializeObject<List<int>>(path2file);
+            if (result != null && result.Count > 0)
+            {
                 do
                 {
                     var x1 = result.Take(8).ToList();
@@ -249,20 +257,61 @@ namespace LedGeekBox.ViewModel
 
                     List<bool[,]> screen = new List<bool[,]> { l1, l2, l3, l4, l5, l6, l7, l8, l9, l10 };
 
-                    _vmlayout.Apply(screen);
+                    if (_vmlayout != null)
+                    {
+                        _vmlayout.Apply(screen);
+                    }
 
-                    view.maxlayout.UpdateLayout();
+                    BitmapImage newimg = null;
+                    if (view != null)
+                    {
+                        view.maxlayout.UpdateLayout();
+                        newimg = DesignEditor.GetImage(view.maxlayout);
+                    }
 
-                    BitmapImage newimg = DesignEditor.GetImage(view.maxlayout);
-
-                    Datas.Add(new binderClass { imageSource = newimg, rawData = screen });
-
-                } while (result.Count > 0);
-
-                OnPropertyChanged("Datas");
-                ClearClick();
+                    data.Add(new binderClass { imageSource = newimg, rawData = screen });
+                }
+                while (result.Count > 0);
             }
+            return data;
         }
 
+
+        public void ShiftRightClick()
+        {
+            var screen = _vmlayout.ReadScreen();
+
+            var matrice = ViewModelMain.ConverToMatrice(screen);
+            bool[,] newmatrice = new bool[40, 16];
+
+
+            for (int i = 0; i < 39; i++)
+            {
+                newmatrice[i + 1, 0] = matrice[i, 0];
+                newmatrice[i + 1, 1] = matrice[i, 1];
+                newmatrice[i + 1, 2] = matrice[i, 2];
+                newmatrice[i + 1, 3] = matrice[i, 3];
+                newmatrice[i + 1, 4] = matrice[i, 4];
+                newmatrice[i + 1, 5] = matrice[i, 5];
+                newmatrice[i + 1, 6] = matrice[i, 6];
+                newmatrice[i + 1, 7] = matrice[i, 7];
+                newmatrice[i + 1, 8] = matrice[i, 8];
+                newmatrice[i + 1, 9] = matrice[i, 9];
+                newmatrice[i + 1, 10] = matrice[i, 10];
+                newmatrice[i + 1, 11] = matrice[i, 11];
+                newmatrice[i + 1, 12] = matrice[i, 12];
+                newmatrice[i + 1, 13] = matrice[i, 13];
+                newmatrice[i + 1, 14] = matrice[i, 14];
+                newmatrice[i + 1, 15] = matrice[i, 15];
+            }
+
+            
+            _vmlayout.Apply(ViewModelMain.ConverToList(newmatrice));
+        }
+
+        public void Apply(binderClass cls)
+        {
+            _vmlayout.Apply(cls.rawData);
+        }
     }
 }
