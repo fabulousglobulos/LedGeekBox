@@ -42,7 +42,8 @@ namespace LedGeekBox.Model.Scenario
         {
             bool ok = false;
             EDirection dir = EDirection.Bas;
-            do
+
+       do
             {
                 int rand = randomX.Next(1, 5);
                 switch (rand)
@@ -69,7 +70,7 @@ namespace LedGeekBox.Model.Scenario
                         }
                         break;
                     case 4:
-                        if (head.Y != 39 && snakeDirection != EDirection.Gauche)
+                        if (head.X != 39 && snakeDirection != EDirection.Gauche)
                         {
                             ok = true;
                             dir = EDirection.Droite;
@@ -119,34 +120,41 @@ namespace LedGeekBox.Model.Scenario
                 }
                 else
                 {
-                    dir = snakeDirection;
-                    /**************/
-                    if (snake[0].Y == 0 && snakeDirection == EDirection.Haut)
+                    if (snake[0].IsACorner())
                     {
                         dir = GetNextDirection(snake[0], snakeDirection);
                     }
+                    else
+                    {
+                        dir = snakeDirection;
+                        /**************/
+                        if (snake[0].Y == 0 && snakeDirection == EDirection.Haut)
+                        {
+                            dir = GetNextDirection(snake[0], snakeDirection);
+                        }
 
-                    if (snake[0].Y == 15 && snakeDirection == EDirection.Bas)
-                    {
-                        dir = GetNextDirection(snake[0], snakeDirection);
-                    }
+                        if (snake[0].Y == 15 && snakeDirection == EDirection.Bas)
+                        {
+                            dir = GetNextDirection(snake[0], snakeDirection);
+                        }
 
-                    if (snake[0].X == 0 && snakeDirection == EDirection.Gauche)
-                    {
-                        dir = GetNextDirection(snake[0], snakeDirection);
-                    }
+                        if (snake[0].X == 0 && snakeDirection == EDirection.Gauche)
+                        {
+                            dir = GetNextDirection(snake[0], snakeDirection);
+                        }
 
-                    if (snake[0].Y == 39 && snakeDirection == EDirection.Droite)
-                    {
-                        dir = GetNextDirection(snake[0], snakeDirection);
+                        if (snake[0].X == 39 && snakeDirection == EDirection.Droite)
+                        {
+                            dir = GetNextDirection(snake[0], snakeDirection);
+                        }
+                        /************/
                     }
-                    /************/
 
                 }
 
                 bool[,] datas = new bool[40, 16];
 
-                snakeDirection = dir;
+              
                 Position newHead = null;
                 switch (dir)
                 {
@@ -163,6 +171,12 @@ namespace LedGeekBox.Model.Scenario
                         newHead = new Position(snake[0].X, snake[0].Y - 1);
                         break;
                 }
+                if (newHead.X == 40 || newHead.X == -1 || newHead.Y == 16 || newHead.Y == -1)
+                {
+                    
+                }
+                snakeDirection = dir;
+
                 List<Position> newSnake = new List<Position> { newHead, snake[0], snake[1], snake[2], snake[3] };
                 snake = newSnake;
                 datas = NewGrid(snake, datas);
@@ -201,6 +215,16 @@ namespace LedGeekBox.Model.Scenario
         public override string ToString()
         {
             return string.Format("X:{0}  -   Y:{1} ", X, Y);
+        }
+
+
+        public bool IsACorner()
+        {
+            if ((X == 0 && Y == 0) || (X == 39 && Y == 0) || (X == 0 && Y == 15) || (X == 39 && Y == 15))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
