@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Xml;
 using System.Xml.Serialization;
 using LedGeekBox.Arduino;
+using LedGeekBox.Helper;
 using LedGeekBox.View;
 using LedGeekBox.Model;
 using Microsoft.CSharp.RuntimeBinder;
@@ -128,7 +129,7 @@ namespace LedGeekBox.ViewModel
                 //var x = ViewModelMain.ConverToList(data.rawData);
                 foreach (var y in data.rawData)
                 {
-                    var z = ArduinoDriver.BuildList(y);
+                    var z = HelperMatriceInteger.BuildList(y);
                     final.AddRange(z);
                 }
             }
@@ -207,6 +208,15 @@ namespace LedGeekBox.ViewModel
             }
         }
 
+        private static bool [,] Next(List<int> result)
+        {
+            var x = result.Take(8).ToList();
+            var l = HelperMatriceInteger.RevertBuildList(x);
+            result.RemoveRange(0, 8);
+            return l;
+        }
+
+
         public static List<binderClass> Get(string path2file, ViewModelMaxLayout _vmlayout, DesignEditor view)
         {
             List<binderClass> data = new List<binderClass>();
@@ -215,47 +225,54 @@ namespace LedGeekBox.ViewModel
             {
                 do
                 {
-                    var x1 = result.Take(8).ToList();
-                    var l1 = ArduinoDriver.RevertBuildList(x1);
-                    result.RemoveRange(0, 8);
+                    //var x1 = result.Take(8).ToList();
+                    //var l1 = HelperMatriceInteger.RevertBuildList(x1);
+                    //result.RemoveRange(0, 8);
 
-                    var x2 = result.Take(8).ToList();
-                    var l2 = ArduinoDriver.RevertBuildList(x2);
-                    result.RemoveRange(0, 8);
+                    //var x2 = result.Take(8).ToList();
+                    //var l2 = HelperMatriceInteger.RevertBuildList(x2);
+                    //result.RemoveRange(0, 8);
 
-                    var x3 = result.Take(8).ToList();
-                    var l3 = ArduinoDriver.RevertBuildList(x3);
-                    result.RemoveRange(0, 8);
+                    //var x3 = result.Take(8).ToList();
+                    //var l3 = HelperMatriceInteger.RevertBuildList(x3);
+                    //result.RemoveRange(0, 8);
 
-                    var x4 = result.Take(8).ToList();
-                    var l4 = ArduinoDriver.RevertBuildList(x4);
-                    result.RemoveRange(0, 8);
+                    //var x4 = result.Take(8).ToList();
+                    //var l4 = HelperMatriceInteger.RevertBuildList(x4);
+                    //result.RemoveRange(0, 8);
 
-                    var x5 = result.Take(8).ToList();
-                    var l5 = ArduinoDriver.RevertBuildList(x5);
-                    result.RemoveRange(0, 8);
+                    //var x5 = result.Take(8).ToList();
+                    //var l5 = HelperMatriceInteger.RevertBuildList(x5);
+                    //result.RemoveRange(0, 8);
 
-                    var x6 = result.Take(8).ToList();
-                    var l6 = ArduinoDriver.RevertBuildList(x6);
-                    result.RemoveRange(0, 8);
+                    //var x6 = result.Take(8).ToList();
+                    //var l6 = HelperMatriceInteger.RevertBuildList(x6);
+                    //result.RemoveRange(0, 8);
 
-                    var x7 = result.Take(8).ToList();
-                    var l7 = ArduinoDriver.RevertBuildList(x7);
-                    result.RemoveRange(0, 8);
+                    //var x7 = result.Take(8).ToList();
+                    //var l7 = HelperMatriceInteger.RevertBuildList(x7);
+                    //result.RemoveRange(0, 8);
 
-                    var x8 = result.Take(8).ToList();
-                    var l8 = ArduinoDriver.RevertBuildList(x8);
-                    result.RemoveRange(0, 8);
+                    //var x8 = result.Take(8).ToList();
+                    //var l8 = HelperMatriceInteger.RevertBuildList(x8);
+                    //result.RemoveRange(0, 8);
 
-                    var x9 = result.Take(8).ToList();
-                    var l9 = ArduinoDriver.RevertBuildList(x9);
-                    result.RemoveRange(0, 8);
+                    //var x9 = result.Take(8).ToList();
+                    //var l9 = HelperMatriceInteger.RevertBuildList(x9);
+                    //result.RemoveRange(0, 8);
 
-                    var x10 = result.Take(8).ToList();
-                    var l10 = ArduinoDriver.RevertBuildList(x10);
-                    result.RemoveRange(0, 8);
+                    //var x10 = result.Take(8).ToList();
+                    //var l10 = HelperMatriceInteger.RevertBuildList(x10);
+                    //result.RemoveRange(0, 8);
 
-                    List<bool[,]> screen = new List<bool[,]> { l1, l2, l3, l4, l5, l6, l7, l8, l9, l10 };
+                    //List<bool[,]> screen = new List<bool[,]> { l1, l2, l3, l4, l5, l6, l7, l8, l9, l10 };
+
+                    List<bool[,]> screen = new List<bool[,]>();
+                    for (int i = 0; i < 10; i++)
+                    {
+                        screen.Add(Next(result));
+                    }
+                           
 
                     if (_vmlayout != null)
                     {
@@ -281,7 +298,7 @@ namespace LedGeekBox.ViewModel
         {
             var screen = _vmlayout.ReadScreen();
 
-            var matrice = ViewModelMain.ConverToMatrice(screen);
+            var matrice = HelperMatriceListConvertor.ConvertToMatrice(screen);
             bool[,] newmatrice = new bool[40, 16];
 
 
@@ -306,7 +323,7 @@ namespace LedGeekBox.ViewModel
             }
 
             
-            _vmlayout.Apply(ViewModelMain.ConverToList(newmatrice));
+            _vmlayout.Apply(HelperMatriceListConvertor.ConvertToList(newmatrice));
         }
 
         public void Apply(binderClass cls)

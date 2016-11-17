@@ -9,7 +9,7 @@ using System.Xml;
 
 namespace LedGeekBox.Model
 {
-    public static class Helper
+    public static class HelperLetterDefinition
     {
         static bool _init = false;
 

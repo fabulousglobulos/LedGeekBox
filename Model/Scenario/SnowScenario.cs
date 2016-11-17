@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using LedGeekBox.Helper;
 using LedGeekBox.ViewModel;
 
 namespace LedGeekBox.Model.Scenario
@@ -75,7 +76,7 @@ namespace LedGeekBox.Model.Scenario
                 List<SnowFlake> dead = flakes.Where(f => f.PositionY > 16).ToList();
                 dead.ForEach(d => flakes.Remove(d));
 
-                var line1 = ViewModelMain.ConverToList(datas);
+                var line1 = HelperMatriceListConvertor.ConvertToList(datas);
 
                 _steps.ForEach(x => x.Apply(line1));
 

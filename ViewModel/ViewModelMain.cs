@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using LedGeekBox.Arduino;
+using LedGeekBox.Helper;
 using LedGeekBox.Model;
 using LedGeekBox.Model.Scenario;
 using LedGeekBox.View;
@@ -22,8 +23,6 @@ namespace LedGeekBox.ViewModel
 {
     public class ViewModelMain : INotifyPropertyChanged
     {
-
-
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string property)
         {
@@ -137,8 +136,6 @@ namespace LedGeekBox.ViewModel
             }
         }
 
-        //private ViewModelMaxLayout vmLayout;
-        //private ArduinoDriver arduino;
         private List<IStep> steps = null;
 
         ArduinoDriver arduino = new ArduinoDriver();
@@ -146,8 +143,7 @@ namespace LedGeekBox.ViewModel
         public ViewModelMain(ViewModelMaxLayout vm)
         {
             steps = new List<IStep> { vm, arduino };
-            //vmLayout = vm;
-            //arduino = arduinoController;
+
             XDisplayCommand = new RelayCommand(o => XDisplayClick());
             DisplayCustomTextCommand = new RelayCommand(o => DisplayCustomTextClick());
             DisplayHourCommand = new RelayCommand(o => DisplayHourClick());
@@ -159,7 +155,7 @@ namespace LedGeekBox.ViewModel
             Line2 = "@coucou #ABC";
             IsSimulation = false;
             Reverse2 = true;
-            var a = Helper.Get("a");//force to load setup
+            var a = HelperLetterDefinition.Get("a");//force to load setup
 
             Scenarios += "MOVIE(file=pacman.xml)" + Environment.NewLine;
             Scenarios += "SNAKE()" + Environment.NewLine;
@@ -171,7 +167,7 @@ namespace LedGeekBox.ViewModel
             Scenarios += "TEXT(msg1=prout;msg2=123456789 ? )" + Environment.NewLine;
             Scenarios += "FILLING()" + Environment.NewLine;
             Scenarios += "CLEAR()" + Environment.NewLine;
-            
+
         }
 
         bool x = true;
@@ -210,92 +206,68 @@ namespace LedGeekBox.ViewModel
             }
             ModelHelper.log(datas);
 
-            var line1 = ConverToList(datas);
+            var line1 = HelperMatriceListConvertor.ConvertToList(datas);
             steps.ForEach(x => x.Apply(line1));
             ModelHelper.log(line1);
-
-            //var line2 = ConverToList(datas, false);
-            //steps.ForEach(x => x.Apply(line2, false));ScenarioCommand
-            //ModelHelper.log(line2);
         }
 
 
         public void DesignModeClick()
         {
-            new DesignEditor( arduino).ShowDialog();
-            
-            //var vm = steps[0] as ViewModelMaxLayout;
-            //if (vm != null)
-            //{
-            //    var result = vm.ReadScreen();
-            //    steps[1].Apply(result);
-            //}
+            new DesignEditor(arduino).ShowDialog();
         }
 
-        public static List<bool[,]> ConverToList(bool[,] datas)
-        {
-            // int inf = firstline ? 0 : 8;
+        //public static List<bool[,]> ConverToList(bool[,] datas)
+        //{
+        //    List<bool[,]> l = new List<bool[,]>();
 
-            List<bool[,]> l = new List<bool[,]>();
+        //    for (int i = 0; i < 5; i++)
+        //    {
+        //        bool[,] x = new bool[8, 8];
+        //        for (int j = 0; j < 8; j++)
+        //        {
+        //            for (int k = 0; k < 8; k++)
+        //            {
+        //                x[k, j] = datas[i * 8 + j, k]; //TODO verifier // int inf = firstline ? 0 : 8;
+        //            }
+        //        }
+        //        l.Add(x);
+        //    }
 
-            for (int i = 0; i < 5; i++)
-            {
-                    bool[,] x = new bool[8, 8];
-                    for (int j = 0; j < 8; j++)
-                    {
-                        for (int k = 0; k < 8; k++)
-                        {
-                            x[k, j] = datas[i * 8 + j, k]; //TODO verifier // int inf = firstline ? 0 : 8;
-                        }
-                    }
-                    l.Add(x);
-            }
+        //    for (int i = 0; i < 5; i++)
+        //    {
+        //        bool[,] x2 = new bool[8, 8];
+        //        for (int j = 0; j < 8; j++)
+        //        {
+        //            for (int k = 0; k < 8; k++)
+        //            {
+        //                x2[k, j] = datas[i * 8 + j, 8 + k]; //TODO verifier // int inf = firstline ? 0 : 8;
+        //            }
+        //        }
+        //        l.Add(x2);
+        //    }
 
-            for (int i = 0; i < 5; i++)
-            {
-                bool[,] x2 = new bool[8, 8];
-                for (int j = 0; j < 8; j++)
-                {
-                    for (int k = 0; k < 8; k++)
-                    {
-                        x2[k, j] = datas[i * 8 + j, 8 + k]; //TODO verifier // int inf = firstline ? 0 : 8;
-                    }
-                }
-                l.Add(x2);
-            }
+        //    return l;
+        //}
 
-            return l;
-        }
+        //public static bool[,] ConverToMatrice(List<bool[,]> datas)
+        //{
+        //    bool[,] matrice = new bool[40, 16];
 
-        public static bool[,]  ConverToMatrice(List<bool[,]> datas)
-        {
-            bool[,] matrice = new bool[40,16];
+        //    for (int i = 0; i < 5; i++)
+        //    {
+        //        for (int j = 0; j < 8; j++)
+        //        {
+        //            for (int k = 0; k < 8; k++)
+        //            {
+        //                matrice[i * 8 + j, k] = datas[i][k, j];
+        //                matrice[i * 8 + j, k + 8] = datas[i + 5][k, j];
+        //            }
+        //        }
+        //    }
 
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    for (int k = 0; k < 8; k++)
-                    {
-                        matrice[i * 8 + j, k] = datas[i][ k,j]; 
-                    }
-                }
-            }
-
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    for (int k = 0; k < 8; k++)
-                    {
-                        matrice[i * 8 + j, k+8] = datas[i+5][k,j]; 
-                    }
-                }
-            }
-
-            return matrice;
-        }
-
+        //    return matrice;
+        //}
 
         private Bitmap ResizePicture(Image image, int width, int height)
         {
@@ -324,14 +296,8 @@ namespace LedGeekBox.ViewModel
             t.Start();
         }
 
-
         private void DoScenario()
         {
-            //List<IScenario> scenarios = new List<IScenario>();
-
-            //scenarios.Add(new HourScenario());
-            //scenarios.Add(new TextScenario());
-            //scenarios.Add(new HourScenario());
             List<IScenario> scenarios = ScenariosFactory.Build(Scenarios);
 
             foreach (var scenario in scenarios)
@@ -349,7 +315,6 @@ namespace LedGeekBox.ViewModel
 
             ModelHelper.RenderingGeneric(new ThreadObject { WhatToWrite1 = hour, WhatToWrite2 = date, Steps = steps, });
         }
-
 
         private void XDisplayClick()
         {
@@ -370,7 +335,6 @@ namespace LedGeekBox.ViewModel
 
             x = !x;
         }
-
 
         private void DisplayCustomTextClick()
         {

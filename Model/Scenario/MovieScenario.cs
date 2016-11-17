@@ -24,35 +24,28 @@ namespace LedGeekBox.Model.Scenario
 
         public int Start(List<IStep> steps)
         {
-             list = ViewModelDesignEditor.Get(_scenarioFile, null, null);
+            list = ViewModelDesignEditor.Get(_scenarioFile, null, null);
 
             _steps = steps;
             t1 = new Thread(Render);
             t1.Start();
 
-            return ModelHelper.period * (list.Count+10)*3;
+            return ModelHelper.period * (list.Count + 10) * 3;
         }
 
 
-       
+
         public void Render()
         {
-           
-
             for (int cycle = 0; cycle < NbrOfCycle; cycle++)
             {
-             // bool[,] datas = new bool[40, 16];
                 foreach (var view in list)
                 {
-                    // var line1 = ViewModelMain.ConverToList(view.rawData);
-
                     _steps.ForEach(x => x.Apply(view.rawData));
 
-                    Thread.Sleep(ModelHelper.period*3);
+                    Thread.Sleep(ModelHelper.period * 3);
                 }
             }
-
-
         }
 
         public void Stop()
@@ -65,5 +58,5 @@ namespace LedGeekBox.Model.Scenario
         }
     }
 
-    
+
 }

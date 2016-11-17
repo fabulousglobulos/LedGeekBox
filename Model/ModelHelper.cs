@@ -150,7 +150,7 @@ namespace LedGeekBox.Model
             msg1 = new List<bool[,]>();
             foreach (char x in whatToWrite1)
             {
-                var y = Helper.Get(x.ToString());
+                var y = HelperLetterDefinition.Get(x.ToString());
                 totallenght1 += y.GetLength(1);
                 msg1.Add(y);
             }
@@ -160,7 +160,7 @@ namespace LedGeekBox.Model
             msg2 = new List<bool[,]>();
             foreach (char x in whatToWrite2)
             {
-                var y = Helper.Get(x.ToString());
+                var y = HelperLetterDefinition.Get(x.ToString());
                 totallenght2 += y.GetLength(1);
                 msg2.Add(y);
             }
@@ -215,7 +215,7 @@ namespace LedGeekBox.Model
                     {
                         mainmessage2[inc, localcursor] = x[inc, j];
                     }
-                    
+
                     localcursor++;
                 }
             }
@@ -273,7 +273,7 @@ namespace LedGeekBox.Model
             for (int o1 = 0; o1 <= max; o1++)
             {
                 List<bool[,]> dico = new List<bool[,]>();
-                
+
                 List<bool[,]> z = new List<bool[,]>();
                 #region 1
 
@@ -292,7 +292,7 @@ namespace LedGeekBox.Model
                         break;
                     }
 
-                    if (smallindex > (Definition.Number_Led_X_Max7219-1)) //on cherche a remplir uniquement une matrix, sinon on passe au suivant
+                    if (smallindex > (Definition.Number_Led_X_Max7219 - 1)) //on cherche a remplir uniquement une matrix, sinon on passe au suivant
                     {
                         z.Add(current);
                         current = new bool[Definition.Number_Led_X_Max7219, Definition.Number_Led_Y_Max7219];
@@ -308,7 +308,7 @@ namespace LedGeekBox.Model
                             }
                         }
                         else
-                        { 
+                        {
                             for (int inc = 0; inc < Definition.Number_Led_X_Max7219; inc++)
                             {
                                 current[inc, smallindex] = false;
@@ -330,11 +330,11 @@ namespace LedGeekBox.Model
                     z.Add(current);
                 }
 
-                dico.Add(z.Count > 0 ? z[0] : Helper.EmptyMatrix);
-                dico.Add(z.Count > 1 ? z[1] : Helper.EmptyMatrix);
-                dico.Add(z.Count > 2 ? z[2] : Helper.EmptyMatrix);
-                dico.Add(z.Count > 3 ? z[3] : Helper.EmptyMatrix);
-                dico.Add(z.Count > 4 ? z[4] : Helper.EmptyMatrix);
+                dico.Add(z.Count > 0 ? z[0] : HelperLetterDefinition.EmptyMatrix);
+                dico.Add(z.Count > 1 ? z[1] : HelperLetterDefinition.EmptyMatrix);
+                dico.Add(z.Count > 2 ? z[2] : HelperLetterDefinition.EmptyMatrix);
+                dico.Add(z.Count > 3 ? z[3] : HelperLetterDefinition.EmptyMatrix);
+                dico.Add(z.Count > 4 ? z[4] : HelperLetterDefinition.EmptyMatrix);
 
                 #endregion 1
 
@@ -394,11 +394,11 @@ namespace LedGeekBox.Model
                     z2.Add(current2);
                 }
 
-                dico.Add(z2.Count > 0 ? z2[0] : Helper.EmptyMatrix);
-                dico.Add(z2.Count > 1 ? z2[1] : Helper.EmptyMatrix);
-                dico.Add(z2.Count > 2 ? z2[2] : Helper.EmptyMatrix);
-                dico.Add(z2.Count > 3 ? z2[3] : Helper.EmptyMatrix);
-                dico.Add(z2.Count > 4 ? z2[4] : Helper.EmptyMatrix);
+                dico.Add(z2.Count > 0 ? z2[0] : HelperLetterDefinition.EmptyMatrix);
+                dico.Add(z2.Count > 1 ? z2[1] : HelperLetterDefinition.EmptyMatrix);
+                dico.Add(z2.Count > 2 ? z2[2] : HelperLetterDefinition.EmptyMatrix);
+                dico.Add(z2.Count > 3 ? z2[3] : HelperLetterDefinition.EmptyMatrix);
+                dico.Add(z2.Count > 4 ? z2[4] : HelperLetterDefinition.EmptyMatrix);
 
                 #endregion 2
 
@@ -407,7 +407,7 @@ namespace LedGeekBox.Model
             }
             Thread.Sleep(period * 2);
         }
-        
+
 
 
         static bool[,] Merge(bool[,] original, bool[,] added)
@@ -436,7 +436,7 @@ namespace LedGeekBox.Model
             int totallenght = 0;
             List<bool[,]> msg = whatToWrite.ToList().Select(x =>
             {
-                var y = Helper.Get(x.ToString());
+                var y = HelperLetterDefinition.Get(x.ToString());
                 totallenght += y.GetLength(1);
                 return y;
             }).ToList();
@@ -482,7 +482,7 @@ namespace LedGeekBox.Model
                         break;
                     }
 
-                    if (smallindex > (Definition.Number_Led_X_Max7219-1)) //on cherche a remplir uniquement une matrix, sinon on passe au suivant
+                    if (smallindex > (Definition.Number_Led_X_Max7219 - 1)) //on cherche a remplir uniquement une matrix, sinon on passe au suivant
                     {
                         z.Add(current);
                         current = new bool[Definition.Number_Led_X_Max7219, Definition.Number_Led_Y_Max7219];
@@ -506,9 +506,9 @@ namespace LedGeekBox.Model
 
                 List<bool[,]> dico = new List<bool[,]>();
 
-                for (int inc = 0; inc <( Definition.Number_Max7219_X * Definition.Number_Max7219_Y); inc++)
+                for (int inc = 0; inc < (Definition.Number_Max7219_X * Definition.Number_Max7219_Y); inc++)
                 {
-                    dico.Add(z.Count > inc ? z[inc] : Helper.EmptyMatrix);
+                    dico.Add(z.Count > inc ? z[inc] : HelperLetterDefinition.EmptyMatrix);
                 }
 
                 stp.Apply(dico);

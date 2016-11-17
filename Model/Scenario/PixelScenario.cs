@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using LedGeekBox.ViewModel;
+using LedGeekBox.Helper;
 
 namespace LedGeekBox.Model.Scenario
 {
@@ -56,7 +57,7 @@ namespace LedGeekBox.Model.Scenario
                     id++;
                 }
             }
-            var all = ViewModelMain.ConverToList(BuildMatrice(dico));
+            var all = HelperMatriceListConvertor.ConvertToList(BuildMatrice(dico));
             _steps.ForEach(x => x.Apply(all));
 
 
@@ -76,7 +77,7 @@ namespace LedGeekBox.Model.Scenario
                 if (x3 > 0)
                     dico.Remove(x3);
 
-                all = ViewModelMain.ConverToList(BuildMatrice(dico));
+                all = HelperMatriceListConvertor.ConvertToList(BuildMatrice(dico));
                 _steps.ForEach(s => s.Apply(all));
 
                 Thread.Sleep(ModelHelper.period);

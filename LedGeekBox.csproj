@@ -86,6 +86,8 @@
     <Compile Include="Model\Scenario\HourScenario.cs" />
     <Compile Include="Model\Scenario\IScenario.cs" />
     <Compile Include="Model\ThreadObject.cs" />
+    <Compile Include="Helper\HelperMatriceInteger.cs" />
+    <Compile Include="Helper\HelperMatriceListConvertor.cs" />
     <Compile Include="ViewModel\ViewModelDesignEditor.cs" />
     <Compile Include="View\ColorToBrushConverter.cs" />
     <Compile Include="Model\Configuration.cs" />

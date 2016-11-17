@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using LedGeekBox.Helper;
 using LedGeekBox.ViewModel;
 
 namespace LedGeekBox.Model.Scenario
@@ -165,7 +166,7 @@ namespace LedGeekBox.Model.Scenario
                 List<Position> newSnake = new List<Position> { newHead, snake[0], snake[1], snake[2], snake[3] };
                 snake = newSnake;
                 datas = NewGrid(snake, datas);
-                var line1 = ViewModelMain.ConverToList(datas);
+                var line1 = HelperMatriceListConvertor.ConvertToList(datas);
 
                 _steps.ForEach(x => x.Apply(line1));
 
