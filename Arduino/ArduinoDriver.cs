@@ -31,7 +31,7 @@ namespace LedGeekBox.Arduino
             get; set;
         }
 
-        private bool Init(string port = "COM4", int rate = 115200)
+        private bool Init(string port = "COM5", int rate = 115200)
         {
             if (Simulation)
             {
