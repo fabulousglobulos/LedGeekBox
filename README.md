@@ -14,3 +14,4 @@ Inside it contains  8 ints (each row) per matrice display. Since we have 10 matr
 Note: applications works with official arduino (tested on arduino uno) and also arduino like (cheap arduino fake , like ATmega328).
 
 In terme of hardaware, since max7219 support up to 8 matrice per row. The source code have two instance of ledcontrol class (each 5 matrices)
+
