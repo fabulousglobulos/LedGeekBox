@@ -1,16 +1,16 @@
 #include "LedControl.h"
 #include <binary.h>
-#include <LiquidCrystal.h>
+//#include <LiquidCrystal.h>
 
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+//LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 
 
 //data - clk -  !cs
-LedControl lc1 = LedControl(8, 9, 10, 5); //LedControl(12,11,10,1);
+LedControl lc1 = LedControl(4, 5, 6, 5); //LedControl(12,11,10,1);
 
 
-LedControl lc2 = LedControl(6, 7, 13, 5); //LedControl(12,11,10,1);
+LedControl lc2 = LedControl(10, 11, 12, 5); //LedControl(12,11,10,1);
 
 //unsigned long delaytime = 1000;
 
@@ -20,8 +20,8 @@ String cmd = "";
 
 void setup() {
   // init LCD
-  lcd.begin(16, 2);
-  lcd.print("Hello :");
+  //lcd.begin(16, 2);
+  //lcd.print("Hello :");
 
   ///// init first row
   lc1.shutdown(0, false);
@@ -82,15 +82,15 @@ void loop() {
       if ( c == 'A') //start a new line
       {
         cmd = "";
-        lcd.setCursor(0, 1);
-        lcd.print("A ");
+        //lcd.setCursor(0, 1);
+        //lcd.print("A ");
       }
       else
       {
         if ( c == 'B')
         { //end now we receive the full line
-          lcd.setCursor(0, 1);
-          lcd.print(" B");
+          //lcd.setCursor(0, 1);
+          //lcd.print(" B");
           SplitItAndDisplay();
         }
         else
