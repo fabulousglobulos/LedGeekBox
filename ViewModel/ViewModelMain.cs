@@ -157,6 +157,7 @@ namespace LedGeekBox.ViewModel
             Reverse2 = true;
             var a = HelperLetterDefinition.Get("a");//force to load setup
 
+            Scenarios += "BIGTEXT(msg=Coucou)" + Environment.NewLine;
             Scenarios += "MOVIE(file=pacman.xml)" + Environment.NewLine;
             Scenarios += "SNAKE()" + Environment.NewLine;
             Scenarios += "HOUR()" + Environment.NewLine;

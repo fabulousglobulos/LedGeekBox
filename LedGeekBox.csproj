@@ -82,6 +82,7 @@
     <Compile Include="Model\Scenario\MovieScenario.cs" />
     <Compile Include="Model\Scenario\SnakeScenario.cs" />
     <Compile Include="Model\Scenario\SnowScenario.cs" />
+    <Compile Include="Model\Scenario\BigTextScenario.cs" />
     <Compile Include="Model\Scenario\TextScenario.cs" />
     <Compile Include="Model\Scenario\HourScenario.cs" />
     <Compile Include="Model\Scenario\IScenario.cs" />

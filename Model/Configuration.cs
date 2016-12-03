@@ -13,7 +13,7 @@ namespace LedGeekBox.Model
     {
         static bool _init = false;
 
-        public static bool[, ]EmptyMatrix  = new bool[8,8];
+        public static bool[,] EmptyMatrix = new bool[8, 8];
 
         private static void LoadFontCollectionFromResource()
         {
@@ -32,12 +32,18 @@ namespace LedGeekBox.Model
 
         public static bool[,] Get(string key)
         {
-            LoadFontCollectionFromResource();
+            try
+            {
+                LoadFontCollectionFromResource();
 
-            var r = m_fcFontCollection.lstFontList[0].lstSymbolList.First(x => x.sDescription == key);
+                var r = m_fcFontCollection.lstFontList[0].lstSymbolList.First(x => x.sDescription == key);
 
-            return r.bLedOnMatrix;
-
+                return r.bLedOnMatrix;
+            }
+            catch (Exception E)
+            {
+                return new bool[0, 0];
+            }
         }
 
         private static LedMatrixSymbolFontCollection m_fcFontCollection;

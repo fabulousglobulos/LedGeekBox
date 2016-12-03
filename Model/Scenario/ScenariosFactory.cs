@@ -59,6 +59,15 @@ namespace LedGeekBox.Model.Scenario
 
                             break;
                         }
+                    case "BIGTEXT":
+                        {
+                            Dictionary<string, string> arguments = GetArguments(s);
+
+                            sco = new BigTextScenario(arguments["MSG"]);
+
+                            break;
+                        }
+
                     case "FILLING":
                         {
                             sco = new FillingScenario();
