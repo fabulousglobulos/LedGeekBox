@@ -31,21 +31,29 @@ namespace LedGeekBox.Arduino
             get; set;
         }
 
-        private bool Init(string port = "COM5", int rate = 115200)
+        //private bool Init(string port = "COM5", int rate = 115200)
+
+        public string Port { get; set; }
+        public int Rate { get; set; }
+
+        public void Init()
         {
             if (Simulation)
             {
-                return true;
+                return;
             }
 
             if (_havebeeninit == true)
             {
-                return _havebeeninit;
+                if (serial != null)
+                {
+                    serial.Close();
+                }
+                //  return _havebeeninit;
             }
-            serial = new SerialPort(port, rate);
+            serial = new SerialPort(Port, Rate);
             serial.Open();
             _havebeeninit = serial.IsOpen;
-            return _havebeeninit;
         }
 
 
@@ -96,7 +104,7 @@ namespace LedGeekBox.Arduino
                     {
                         for (int j = 0; j < x; j++)
                         {
-                            t[i, j] = rawdata[j,x-1-i];
+                            t[i, j] = rawdata[j, x - 1 - i];
                         }
                     }
                 }
@@ -116,7 +124,7 @@ namespace LedGeekBox.Arduino
             Write(dico);
         }
 
-        
+
         private void Write(Dictionary<int, List<int>> datas)
         {
             string final = "1+";
@@ -147,7 +155,7 @@ namespace LedGeekBox.Arduino
         }
 
 
-       
-           
+
+
     }
 }

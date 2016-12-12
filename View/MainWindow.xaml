@@ -49,8 +49,15 @@
             <TextBox   x:Name="message2"   Text="{Binding Path=Line2}"/>
             <CheckBox  Content="Reverse" IsChecked="{Binding Path=Reverse2}"  />
         </WrapPanel>
-        
-        
+
+        <WrapPanel Grid.Row="2" Grid.Column="3"  Orientation="Vertical" HorizontalAlignment="Center">
+            
+            <TextBox   x:Name="comport"   Text="{Binding Path=ComPort}"/>
+            <TextBox   x:Name="comrate"   Text="{Binding Path=ComRate}"/>
+            <Button Command="{Binding Path=InitUsbCommand}" Height="20"  Content="Reboot USB" HorizontalAlignment="Center"></Button>
+        </WrapPanel>
+
+
         <!-- scenarios -->
         <Button Command="{Binding Path=ScenarioCommand}" Grid.Row="3" Grid.Column="0" Height="20"  Content="Scenario" HorizontalAlignment="Center"></Button>
 
