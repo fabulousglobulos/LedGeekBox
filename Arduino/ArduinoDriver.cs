@@ -82,19 +82,20 @@ namespace LedGeekBox.Arduino
             List<bool[,]> transposed = new List<bool[,]>();
 
             //TODO remplacer un for int i= 0  et pour les 5 premiers faires 90 et les 5 autres 270
-            int indice = 1;
-            foreach (var rawdata in rawdatas)
+            //int indice = 1;
+            //foreach (var rawdata in rawdatas)
+            for(int indice = (rawdatas.Count-1); indice >= 0 ; indice--)
             {
                 bool[,] t = new bool[8, 8];
-                int x = rawdata.GetLength(0);
+                int x = rawdatas[indice].GetLength(0);
 
-                if (indice > 5)
+                if (indice >= 5)
                 {
                     for (int i = 0; i < x; i++)
                     {
                         for (int j = 0; j < x; j++)
                         {
-                            t[i, j] = rawdata[x - 1 - j, i];
+                            t[i, j] = rawdatas[indice][x - 1 - j, i];
                         }
                     }
                 }
@@ -104,12 +105,12 @@ namespace LedGeekBox.Arduino
                     {
                         for (int j = 0; j < x; j++)
                         {
-                            t[i, j] = rawdata[j, x - 1 - i];
+                            t[i, j] = rawdatas[indice][j, x - 1 - i];
                         }
                     }
                 }
                 transposed.Add(t);
-                indice++;
+             //   indice++;
             }
             rawdatas = transposed;
 
