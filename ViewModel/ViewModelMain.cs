@@ -293,22 +293,57 @@ namespace LedGeekBox.ViewModel
             return destImage;
         }
 
+        Thread scenarioThread;
+
         private void ScenarioClick()
         {
-            Thread t = new Thread(DoScenario);
-            t.Start();
+            if (scenarioThread == null)
+            {
+                scenarioThread = new Thread(DoScenario);
+                scenarioThread.Start();
+            }
+            else
+            {
+                scenarioThread.Abort();
+                scenarioThread = null;
+                if (currentScenario != null)
+                {
+                    currentScenario.Stop();
+                    currentScenario = null;
+                }
+
+                new EmptyScenario().Start(this.steps);
+
+            }
+          
         }
+
+        IScenario currentScenario = null;
 
         private void DoScenario()
         {
-            List<IScenario> scenarios = ScenariosFactory.Build(Scenarios);
-
-            foreach (var scenario in scenarios)
+            try
             {
-                int wait = scenario.Start(steps);
-                Thread.Sleep(wait);
-                scenario.Stop();
+                List<IScenario> scenarios = ScenariosFactory.Build(Scenarios);
+
+                foreach (var scenario in scenarios)
+                {
+                    currentScenario = scenario;
+                    int wait = scenario.Start(steps);
+                    Thread.Sleep(wait);
+                    scenario.Stop();
+                }
+                currentScenario = null;
             }
+            catch (ThreadAbortException)
+            {
+                //on fait rien car on a cliquer sur stop 
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            
         }
 
         private void DisplayHourClick()
