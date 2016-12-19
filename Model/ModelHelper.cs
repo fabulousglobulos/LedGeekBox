@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using LedGeekBox.Helper;
 using LedGeekBox.Model.Scenario;
 
 namespace LedGeekBox.Model
@@ -408,6 +409,54 @@ namespace LedGeekBox.Model
             Thread.Sleep(period * 2);
         }
 
+
+
+
+        public static bool[,] Extract(bool[,] source, int x, int y, int dimX, int dimY)
+        {
+            bool[,] retour = new bool[dimX, dimY];
+
+            for (int i = 0; i < dimX; i++)
+            {
+                for (int j = 0; j < dimY; j++)
+                {
+                    retour[i, j] = source[x + i, y + j];
+                }
+            }
+            return retour;
+        }
+
+
+       public  static void RenderingGeneric(bool[,] datas, List<IStep> stp)
+        {
+            log(datas);
+
+            int max = datas.GetLength(0);
+
+            if (max > Definition.Number_Led_X_total)
+            {
+                int nbrIncrement = max - Definition.Number_Led_X_total;
+
+                for (int increment = 0; increment <= nbrIncrement; increment++)
+                {
+                    bool[,] current = ModelHelper.Extract(datas, increment, 0, Definition.Number_Led_X_total,
+                        Definition.Number_Led_Y_total);
+
+
+                    List<bool[,]> dico = HelperMatriceListConvertor.ConvertToList(current);
+
+                    stp.ForEach(s => s.Apply(dico));
+                    Thread.Sleep(period);
+
+                    Thread.Sleep(period * 2);
+                }
+            }
+            else
+            {
+                //TODO centrer
+            }
+
+        }
 
 
         static bool[,] Merge(bool[,] original, bool[,] added)

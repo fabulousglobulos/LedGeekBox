@@ -88,9 +88,11 @@ namespace LedGeekBox.Model.Scenario
                 }
             }
 
-            var line1 = HelperMatriceListConvertor.ConvertToList(mainmessage);
+            ModelHelper.RenderingGeneric(mainmessage, _steps);
 
-            _steps.ForEach(x => x.Apply(line1));
+            //var line1 = HelperMatriceListConvertor.ConvertToList(mainmessage);
+
+            //_steps.ForEach(x => x.Apply(line1));
 
         }
 
